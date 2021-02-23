@@ -1,0 +1,56 @@
+<h1 align="center" class="display-4 mb-5"><p class="font-weight-bold" style="color:lightskyblue">{{title}}</p></h1>
+<div class="row text-center justify-content-center">
+  <div class="col-lg-3.5 ">
+    <div class="card mb-4 " style="width: 30rem;">
+      <img height="40%" class="card-img-top" src="{{productInfo?.productIcon}}">
+      <div class="card-body">
+        <h4 class="card-title ">{{productInfo?.productName}}</h4>
+        <form name="form" #form='ngForm' (ngSubmit)="productInfo?.productStatus == 0 && addToCart()">
+          <div class="text-left">
+            <input hidden name="productId" [value]=productInfo?.productId>
+            <p class="card-test"><strong><span style="color:pink;">Description</span>: </strong>{{productInfo?.productDescription}}</p>
+            <p class="card-text">
+              <strong><span style="color:pink;">Price</span>: </strong>
+              <label id="price">{{productInfo?.productPrice }} RSD</label>
+            </p>
+            <p class="card-text"><strong><span style="color:pink;">Stock</span>: </strong>{{productInfo?.productStock}}</p>
+
+            <label *ngIf="productInfo?.categoryType === 0" class="card-text" for="productSizeInNumber" ><strong><span style="color:pink;">Size</span>: </strong>
+            <select  [(ngModel)]="productSizeInNumber" name = "productSizeInNumber" required>
+              <option [value]=0>XL</option>
+              <option [value]=1>L</option>
+              <option [value]=2>M</option>
+              <option [value]=3>S</option>
+            </select>
+            </label>
+
+            <br>
+
+            <label class="card-text">
+              <strong><span style="color:pink;">Quantity</span>: </strong>
+              <input [(ngModel)]=count
+                     (change)="validateCount()"
+                     type="number"
+                     name="count"
+                     required
+                     min="1"
+                     [max]=productInfo?.productStock
+              >
+            </label>
+
+
+            <p class="card-text"><strong><span style="color:pink;">Subtotal</span>: </strong>
+              <label id="subtotal">{{count * productInfo?.productPrice}} RSD</label>
+            </p>
+          </div>
+          <button type="submit" [disabled]="!form.form.valid" *ngIf="productInfo?.productStatus == 0; else offBlock"
+                  class="btn btn-dark btn-lg"
+          ><p style="color:#DB7093;">Add to cart!</p>
+          </button>
+          <ng-template #offBlock><a class="btn btn-secondary btn-lg disabled">Unavailable</a></ng-template>
+        </form>
+
+      </div>
+    </div>
+  </div>
+</div>
