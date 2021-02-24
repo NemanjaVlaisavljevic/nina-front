@@ -22,9 +22,14 @@
                     <tr *ngFor="let item of (order$ | async)?.products">
                         <th class="align-middle" scope="row">
                             <!-- ADD CHECK IF ACC IS ADMIN!! -->
-                            <a routerLink="/admin/product/{{item.productId}}/edit">
+                            <div *ngIf="currentUser.role === 'USER'; else notUser">\
                                 <img class="img-thumbnail product-thumbnail" src="{{item.productIcon}}" alt="{{item.productName}}">
-                            </a>
+                            </div>
+                            <ng-template #notUser>
+                                <a routerLink="/admin/product/{{item.productId}}/edit">
+                                    <img class="img-thumbnail product-thumbnail" src="{{item.productIcon}}" alt="{{item.productName}}">
+                                </a>
+                            </ng-template>
                         </th>
                         <td class="align-middle product-name"><a routerLink="/admin/product/{{item.productId}}/edit">{{item.productName}}</a></td>
                         <td class="align-middle product-description">{{item.productDescription}}</td>

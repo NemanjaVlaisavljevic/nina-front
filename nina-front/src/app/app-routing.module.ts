@@ -31,9 +31,9 @@ const routes: Routes = [
   {path : 'admin/product' , component : ProductListComponent ,
    canActivate : [AuthGuard], data: {roles: [UserRole.ADMIN]}},
   {path : 'admin/product/new' , component : ProductEditComponent ,
-    canActivate : [AuthGuard] , data : {role : [UserRole.ADMIN]}},
+    canActivate : [AuthGuard] , data : {roles : [UserRole.ADMIN]}},
   {path : 'admin/product/:id/edit' , component : ProductEditComponent ,
-    canActivate : [AuthGuard] , data : {role : [UserRole.ADMIN]}}
+    canActivate : [AuthGuard] , data : {roles : [UserRole.ADMIN]}}
 ];
 
 @NgModule({
