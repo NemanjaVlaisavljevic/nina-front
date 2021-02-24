@@ -38,6 +38,7 @@ body {
 .btn-standard:focus {
   background-color: #e4ad96;
   color: #123D6A;
+  box-shadow: 0 0 8px rgba(171, 59, 97, 0.6);
 }
 
 .btn-standard:disabled , .btn-standard:disabled:hover {
@@ -84,4 +85,20 @@ body {
 
 .form-check-input {
   background-color: #EDE2DC;
+}
+
+.btn-quantity {
+  display: inline-block;
+  border-radius: 50%;
+  font-size: 18px;
+  height: 25px;
+  width: 25px;
+  padding: 0px;
+  line-height: 22px;
+  text-align: center;
+  user-select:none;
+}
+
+.btn-quantity:hover {
+  cursor: pointer;
 }

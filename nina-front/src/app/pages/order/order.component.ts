@@ -37,6 +37,7 @@ export class OrderComponent implements OnInit , OnDestroy {
     });
   }
 
+  // to change: remove pagination and retreive all records
   update() : void{
       let nextPage = 1;
       let size = 10;
@@ -47,6 +48,7 @@ export class OrderComponent implements OnInit , OnDestroy {
       this.orderService.getOrdersInPage(nextPage , size).subscribe(data => {
         this.page = data;
         console.log('Got current users orders');
+        console.log(this.page);
           },error => {
         console.log('Cannot retrieve current user orders.')
       });

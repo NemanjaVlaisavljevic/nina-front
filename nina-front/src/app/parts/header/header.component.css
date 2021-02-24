@@ -5,6 +5,20 @@ nav {
     font-weight: 500;
 }
 
+.navbar-logo {
+    border-radius: 50%;
+}
+
+.navbar-bars {
+    font-size:30px;
+    color: #AB3B61;
+}
+
+.navbar-cart-link {
+    margin-left: 5px;
+    display: inline-block
+}
+
 .navbar-brand {
     font-family: 'quicksand';
     font-style: normal;
@@ -35,4 +49,16 @@ nav a:hover, a:visited:hover {
     background-color: #EDD8CF;
     border: 1px solid #BBB2B5;
     color: #AB3B61;
+}
+
+.sign-in-invalid {
+    color: #9A1003;
+}
+
+.dropdown-item:hover, .dropdown-item:focus {
+    background-color: #EDE2DC;
+}
+
+.dropdown-divider {
+    border-top: 1px solid #BBB2B5;
 }
