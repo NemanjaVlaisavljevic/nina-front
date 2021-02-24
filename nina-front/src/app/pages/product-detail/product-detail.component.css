@@ -1,0 +1,141 @@
+.container {
+    width: 100%;
+    margin: 0px;
+}
+
+.container-grid {
+    
+    display: grid;
+    grid-template-columns: minmax(0px, 1fr) auto minmax(0px, 1fr);
+    grid-template-rows: auto;
+}
+
+.image-select-container {
+    display: flex;
+    flex-wrap:wrap;
+    justify-items: stretch;
+}
+
+@media only screen and (max-width: 576px) { 
+    .image-select {
+        height: 50px; 
+        width: 16.6%;
+    }
+}
+
+@media only screen and (min-width: 576px) {
+    .image-select {
+        height: 50px; 
+        width: 20%;
+    }
+}
+
+@media only screen and (min-width: 768px) {
+    .image-select {
+        height: 50px; 
+        width: 12.5%;
+    }
+}
+
+@media only screen and (min-width: 992px) {
+    .image-select {
+        height: 50px; 
+        width: 12.5%;
+    }
+}
+
+@media only screen and (min-width: 1200px) {
+    .image-select {
+        height: 50px; 
+        width: 12.5%;
+    }
+}
+
+.container-quantity {
+    padding: 0 1.5rem 0 1.5rem;
+
+}
+
+.container-add {
+    padding: 0 1.5rem 0 1.5rem;
+}
+
+.btn-quantity {
+    display: inline-block;
+    border-radius: 50%;
+    font-size: 18px;
+    height: 25px;
+    width: 25px;
+    padding: 0px;
+    line-height: 22px;
+    text-align: center;
+    user-select:none;
+}
+
+.btn-quantity:hover {
+    cursor: pointer;
+}
+
+.btn {
+    outline: 0;
+    box-shadow: 0 0 0 0;
+}
+
+.product-grid {
+    background-color: #EDC8B8;
+    display: grid;
+    grid-template-columns: 42vw 42vw;
+    grid-template-rows: auto;
+    grid-column: 2/3;
+}
+
+.product-details {
+    grid-column: 2/3;
+    display: flexbox; 
+    word-wrap: break-word;
+    flex-direction: column;
+    padding: 1.5rem;
+    
+}
+
+.container {
+    color: #AB3B61;
+}
+
+
+
+.product-images {
+    grid-column: 1/2;
+    margin: 20px;
+    max-width: 40vw;
+    max-height: auto;
+
+}
+
+.carousel {
+    max-width: 40vw;
+    height: auto;
+    max-height: auto;
+}
+
+.carousel-inner {
+    max-width: 40vw;
+    height: auto;
+    max-height: auto;
+}
+
+.carousel-item {
+    max-width: 40vw;
+    max-height: auto;
+    
+}
+
+.product-image {
+    max-width: 40vw;
+    max-height: 60vw;
+    
+    background-position-x: center;
+    background-position-y: top;
+    background-repeat: no-repeat;
+    background-size: contain !important;
+}

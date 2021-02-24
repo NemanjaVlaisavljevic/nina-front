@@ -1,8 +1,8 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
 import { UserRole } from './enums/UserRole';
-import { CardComponent } from './pages/card/card.component';
 import { CartComponent } from './pages/cart/cart.component';
+import { HomeComponent } from './pages/home/home.component';
 import { LoginComponent } from './pages/login/login.component';
 import { OrderDetailComponent } from './pages/order-detail/order-detail.component';
 import { OrderComponent } from './pages/order/order.component';
@@ -15,12 +15,12 @@ import { AuthGuard } from './_guard/auth.guard';
 
 
 const routes: Routes = [
-  {path : '' , redirectTo: '/product' , pathMatch : 'full'},
-  {path: 'product', component: CardComponent},
+  {path : '' , component: HomeComponent},
+  // {path: 'product', component: CardComponent},
   {path: 'product/:id', component: ProductDetailComponent},
-  {path: 'category/:id', component: CardComponent},
+/*   {path: 'category/:id', component: CardComponent},
   {path: 'category', component: CardComponent},
-  {path : 'login' , component : LoginComponent},
+  {path : 'login' , component : LoginComponent}, */
   {path : 'logout' , component : LoginComponent},
   {path : 'register' , component : SignupComponent},
   {path : 'profile' , component : UserEditComponent , canActivate : [AuthGuard]},

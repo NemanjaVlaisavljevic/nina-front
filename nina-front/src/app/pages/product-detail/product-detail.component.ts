@@ -36,6 +36,17 @@ export class ProductDetailComponent implements OnInit {
 
   }
 
+  increaseCount() {
+    const max = this.productInfo.productStock;
+    if(this.count < max)
+      this.count++;
+  }
+
+  decreaseCount() {
+    if(this.count > 1)
+      this.count--;
+  }
+
   addToCart() : void {
     console.log('Current size of item added : ' + this.productSizeInNumber);
     this.productSize = this.productSizeInNumber;

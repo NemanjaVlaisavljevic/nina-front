@@ -1,0 +1,38 @@
+nav {
+    background-color: #EDC8B8;
+    font-family: 'quicksand';
+    font-style: normal;
+    font-weight: 500;
+}
+
+.navbar-brand {
+    font-family: 'quicksand';
+    font-style: normal;
+    font-weight: 700;
+}
+
+nav a, a:visited {
+    color: #AB3B61;
+}
+
+nav a:hover, a:visited:hover {
+    color: #123D6A
+}
+
+.navbar-toggler:focus {
+    text-decoration: none;
+    outline: 0;
+    box-shadow: 0 0 0 0;
+}
+
+@media only screen and (min-width: 992px) {
+    .dropdown-menu {
+        min-width: 20rem;
+    }
+}
+
+.dropdown-menu {
+    background-color: #EDD8CF;
+    border: 1px solid #BBB2B5;
+    color: #AB3B61;
+}

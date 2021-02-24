@@ -1,0 +1,87 @@
+<!-- <h1 align="center" class="display-4 mb-5"><p class="font-weight-bold" style="color:lightskyblue">{{title}}</p></h1> -->
+
+<!-- <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+  Launch demo modal
+</button>
+ -->
+
+<div class="container container-padding" >
+  <hr>
+  <div class="row mt-2">
+    <div class="col-lg-12 col-md-12">
+      <div class="nav nav-pills nav-fill flex-column flex-sm-row" id="v-pills-tab" role="tablist" aria-orientation="horizontal">
+          <a class="nav-link active" id="v-pills-all-tab" data-toggle="pill" href="#v-pills-all" role="tab" aria-controls="v-pills-all" aria-selected="true">All</a>
+          <a class="nav-link" id="v-pills-clothing-tab" data-toggle="pill" href="#v-pills-clothing" role="tab" aria-controls="v-pills-clothing" aria-selected="false">Clothing</a>
+          <a class="nav-link" id="v-pills-jewlery-tab" data-toggle="pill" href="#v-pills-jewlery" role="tab" aria-controls="v-pills-jewlery" aria-selected="false">Jewlery</a>
+          <a class="nav-link" id="v-pills-mugs-tab" data-toggle="pill" href="#v-pills-mugs" role="tab" aria-controls="v-pills-mugs" aria-selected="false">Mugs</a>
+      </div>
+    </div>
+  </div>
+  
+  <div class="row mt-2">
+    <div class="col-lg-12 col-md-12 ">
+      <div class="tab-content" id="v-pills-tabContent">
+        <div class="tab-pane fade show active" id="v-pills-all" role="tabpanel" aria-labelledby="v-pills-all-tab">
+          <app-product-card-deck [products]="page?.content"></app-product-card-deck>
+        </div>
+        <div class="tab-pane fade" id="v-pills-clothing" role="tabpanel" aria-labelledby="v-pills-clothing-tab">
+          <app-product-card-deck [products]="filterProductsByType(page?.content, 0)"></app-product-card-deck>  
+        </div>
+        <div class="tab-pane fade" id="v-pills-jewlery" role="tabpanel" aria-labelledby="v-pills-jewlery-tab">
+          <app-product-card-deck [products]="filterProductsByType(page?.content, 2)"></app-product-card-deck>
+        </div>
+        <div class="tab-pane fade" id="v-pills-mugs" role="tabpanel" aria-labelledby="v-pills-mugs-tab">
+          <app-product-card-deck [products]="filterProductsByType(page?.content, 1)"></app-product-card-deck>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+
+<!-- <div class="row">
+    <div class="col-3">
+      <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+        <a class="nav-link active" id="v-pills-home-tab" data-toggle="pill" href="#v-pills-home" role="tab" aria-controls="v-pills-home" aria-selected="true">Home</a>
+        <a class="nav-link" id="v-pills-profile-tab" data-toggle="pill" href="#v-pills-profile" role="tab" aria-controls="v-pills-profile" aria-selected="false">Profile</a>
+        <a class="nav-link" id="v-pills-messages-tab" data-toggle="pill" href="#v-pills-messages" role="tab" aria-controls="v-pills-messages" aria-selected="false">Messages</a>
+        <a class="nav-link" id="v-pills-settings-tab" data-toggle="pill" href="#v-pills-settings" role="tab" aria-controls="v-pills-settings" aria-selected="false">Settings</a>
+      </div>
+    </div>
+    <div class="col-9">
+      <div class="tab-content" id="v-pills-tabContent">
+        <div class="tab-pane fade show active" id="v-pills-home" role="tabpanel" aria-labelledby="v-pills-home-tab">...</div>
+        <div class="tab-pane fade" id="v-pills-profile" role="tabpanel" aria-labelledby="v-pills-profile-tab">...</div>
+        <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">...</div>
+        <div class="tab-pane fade" id="v-pills-settings" role="tabpanel" aria-labelledby="v-pills-settings-tab">...</div>
+      </div>
+    </div>
+  </div> -->
+
+<!-- <div class="row card-deck text-center">
+  <div *ngFor="let productInfo of page?.content" class="col-lg-3 ">
+    <div class="card mb-4" style="width: 25rem;">
+      <img height="400px" width="250px" class="card-img-top" src="{{productInfo.productIcon}}" alt="{{productInfo.productName}}">
+      <div class="card-body">
+        <h4 class="card-title ">{{productInfo.productName}}</h4>
+        <div class="text-left">
+          <p class="card-test"><strong><span style="color:black;">Description</span>: </strong>{{productInfo.productDescription}}</p>
+          <p class="card-text"><strong><span style="color:black;">Price</span>: </strong>{{productInfo.productPrice}} RSD</p>
+          <p class="card-text"><strong><span style="color:black;">Stock</span>: </strong>{{productInfo.productStock}}</p>
+        </div>
+        <br>
+        <a routerLink="/product/{{productInfo.productId}}" *ngIf="productInfo.productStatus == 0; else offBlock"
+           class="btn btn-dark btn-lg"
+        ><p style="color:#DB7093;">Add to cart!</p></a>
+        <ng-template #offBlock><a class="btn btn-secondary btn-lg disabled">Unavailable</a></ng-template>
+      </div>
+    </div>
+  </div>
+</div>
+<app-pagination  [currentPage]="page" ></app-pagination> -->
+<!-- 
+<app-add-to-cart-modal modalId='addToCartModal' #addToCartModal></app-add-to-cart-modal> -->

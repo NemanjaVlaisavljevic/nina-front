@@ -1,0 +1,41 @@
+h4 {
+    font-size: calc(100% + 0.2vw);
+}
+
+.card {
+    max-width: 275px;
+    padding: 20px;
+    background-color: #EDE2DC;
+    border: 1px solid #BBB2B5;
+    color: #AB3B61;
+}
+
+.product-info-container {
+    padding-top: 10px;
+    padding-bottom: 0px;
+    padding-left: 0px;
+    padding-right: 0px;
+    height: 100%;
+    display: grid;
+    grid-template-rows: minmax(1px, auto) 1fr 20px;
+    grid-template-columns: 20% 20% 20% 20% 20%;
+}
+
+.product-info-name {
+    grid-column: 1 / 6;
+    grid-row: 1 / 2;
+}
+
+.product-info-stock {
+    grid-column: 1 / 4;
+    grid-row: 3 / 4;
+}
+
+.product-info-price {
+    grid-column: 4 / 6;
+    grid-row: 3 / 4;
+}
+
+a, a:hover, a:visited {
+    text-decoration: none;
+}

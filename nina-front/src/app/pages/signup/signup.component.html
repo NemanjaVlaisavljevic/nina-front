@@ -1,5 +1,86 @@
-<h1 align="center" class="display-4 mb-5">Sign Up</h1>
-<div style="width:40%; margin: 25px auto" >
+<div class="container" >
+    <div class="row mt-2">
+        <div class="col-12 text-center">
+            <h1>Sign Up</h1>
+            <hr>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-6 offset-3">
+            <form #form="ngForm" (ngSubmit)="onSubmit()">
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input [(ngModel)]="user.email" type="email" class="form-control" id="email" name="email" placeholder="Enter email" email required autofocus  #email="ngModel">
+                    <div *ngIf="email.invalid && (email.dirty || email.touched)">
+                        <small *ngIf="email.errors.required">Email is required.</small>
+                        <small *ngIf="email.errors.email">Invalid Email.</small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input  [(ngModel)]="user.password" type="password" class="form-control" id="password" name="password" placeholder="Enter password" minlength="3" required #password="ngModel">
+                    <div *ngIf="password.invalid && (password.dirty || password.touched)">
+                        <small *ngIf="password.errors.required">Password is required.</small>
+                        <small *ngIf="password.errors.minlength">Password must be at least 3 characters long.</small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="password2">Confirm Password</label>
+                    <input [(ngModel)]="secondPassword" type="password" class="form-control" id="password2" name="password2" placeholder="Enter password again" minlength="3" required #confirmPassword="ngModel" pattern="{{ password.value }}">
+                    <div *ngIf="confirmPassword.invalid && (confirmPassword.dirty || confirmPassword.touched)">
+                        <small *ngIf="confirmPassword.errors.required">Confirm Password is required.</small>
+                        <small *ngIf="confirmPassword.errors.minlength">Confirm Password must be at least 3 characters long.</small>
+                        <small *ngIf="confirmPassword.errors.pattern">Password & Confirm Password don't match.</small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="firstName">First Name</label>
+                    <input [(ngModel)]="user.firstName" type="text" class="form-control" id="firstName" name="firstName" placeholder="Enter first name" required #firstName="ngModel">
+                    <div *ngIf="firstName.invalid && (firstName.dirty || firstName.touched)">
+                        <small *ngIf="firstName.errors.required">First Name is required.</small>
+                        <small *ngIf="firstName.errors.minlength">First Name must be at least 3 characters long.</small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="lastName">Last Name</label>
+                    <input [(ngModel)]="user.lastName" type="text" class="form-control" id="lastName" name="lastName" placeholder="Enter last name" required #lastName="ngModel">
+                    <div *ngIf="lastName.invalid && (lastName.dirty || lastName.touched)">
+                        <small *ngIf="lastName.errors.required">Last Name is required.</small>
+                        <small *ngIf="lastName.errors.minlength">Last Name must be at least 3 characters long.</small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone</label>
+                    <input [(ngModel)]="user.phone" type="text" class="form-control" id="phone" name="phone" placeholder="Enter phone" required #phone="ngModel" >
+                    <div *ngIf="phone.invalid && (phone.dirty ||phone.touched)">
+                        <small *ngIf="phone.errors.required">Phone is required.</small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="city">City</label>
+                    <input [(ngModel)]="user.city" type="text" class="form-control" id="city" name="city" placeholder="Enter city" required #city="ngModel">
+                    <div *ngIf="city.invalid && (city.dirty || city.touched)">
+                        <small *ngIf="city.errors.required">City is required.</small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <label for="streetAndNumber">Street and Number</label>
+                    <input [(ngModel)]="user.streetAndNumber" type="text" class="form-control" id="streetAndNumber" name="streetAndNumber" placeholder="Enter street and number of your house" required #streetAndNumber="ngModel">
+                    <div *ngIf="streetAndNumber.invalid && (streetAndNumber.dirty || streetAndNumber.touched)">
+                        <small *ngIf="streetAndNumber.errors.required">Street and number of your house is required.</small>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-standard btn-block" [disabled]="!form.form.valid" >Sign Up</button>
+                  </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+
+
+<!-- <div style="width:40%; margin: 25px auto" >
   <form #form="ngForm" (ngSubmit)="onSubmit()">
     <div class="form-group">
       <label><b>Email address</b></label>
@@ -100,3 +181,4 @@
     </div>
   </form>
 </div>
+ -->
