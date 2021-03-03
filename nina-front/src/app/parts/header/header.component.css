@@ -6,17 +6,17 @@ nav {
 }
 
 .navbar-logo {
-  border-radius: 50%;
+    border-radius: 50%;
 }
 
 .navbar-bars {
-  font-size:30px;
-  color: #AB3B61;
+    font-size:30px;
+    color: #AB3B61;
 }
 
 .navbar-cart-link {
-  margin-left: 5px;
-  display: inline-block
+    margin-left: 5px;
+    display: inline-block
 }
 
 .navbar-brand {
@@ -52,13 +52,13 @@ nav a:hover, a:visited:hover {
 }
 
 .sign-in-invalid {
-  color: #9A1003;
+    color: #9A1003;
 }
 
 .dropdown-item:hover, .dropdown-item:focus {
-  background-color: #EDE2DC;
+    background-color: #EDE2DC;
 }
 
 .dropdown-divider {
-  border-top: 1px solid #BBB2B5;
+    border-top: 1px solid #BBB2B5;
 }

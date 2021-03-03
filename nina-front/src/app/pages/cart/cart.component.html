@@ -1,78 +1,78 @@
 <div class="container-fluid">
-  <div class="row mt-2">
-      <div class="col-12 text-center">
-          <h1>My Cart</h1>
-          <hr>
-      </div>
-  </div>
-  <div class="row">
-      <div class="col-12" *ngIf="productInOrders?.length > 0; else tbody_empty">
-          <table class="table table-responsive-md table-striped">
-              <thead>
-                  <tr>
-                      <th class="text-center" scope="col">Photo</th>
-                      <th scope="col">Name</th>
-                      <th class="text-center" scope="col">Size</th>
-                      <th class="text-center" style="min-width: 115px;" scope="col">Quantity</th>
-                      <th class="text-center" scope="col">Price</th>
-                      <th class="text-center" scope="col">Subtotal</th>
-                      <th class="text-center" scope="col">Action</th>
-                  </tr>
-              </thead>
-                  <tbody>
-                      <tr *ngFor="let productInOrder of productInOrders">
-                          <td class="align-middle text-center" style="width: 75px;" scope="row">
-                              <a routerLink="/product/{{productInOrder.productId}}">
-                                  <img class="img-thumbnail product-thumbnail" src="{{productInOrder.productIcon}}" alt="{{productInOrder.productName}}">
-                              </a>
-                          </td>
-                          <td class="align-middle product-name">
-                              <a routerLink="/product/{{productInOrder.productId}}">
-                                  <span>{{productInOrder.productName}}</span>
-                              </a>
-                          </td>
-                          <td class="align-middle text-center">
-                            {{productInOrder.productSize}}
-                          </td>
-                          <td class="align-middle text-center">
-                              <div class="btn-quantity btn-standard" (click)="minusOne(productInOrder)">-</div>
-                              <span class="mx-2">{{productInOrder.count}}</span>
-                              <div class="btn-quantity btn-standard" (click)="addOne(productInOrder)">+</div>
-                          </td>
-                          <td class="align-middle text-center">
-                              {{productInOrder.productPrice}} RSD
-                          </td>
-                          <td class="align-middle text-center">
-                              {{productInOrder.productPrice * productInOrder.count}} RSD
-                          </td>
-                          <td class="align-middle text-center">
-                              <a (click)="remove(productInOrder)" routerLink="./">Remove</a>
-                          </td>
-                      </tr>
-                  </tbody>
-          </table>
-      </div>
-      <ng-template #tbody_empty>
-          <div class="col-12 text-center">
-              <h4>Cart is currently empty</h4>
-          </div>
-      </ng-template>
-  </div>
-  <div *ngIf="productInOrders?.length > 0">
-      <div class="row">
-          <div class="col-12 text-right">
-              <h5 style="display: inline;">Total: {{total}} RSD</h5>
-          </div>
-      </div>
-      <div class="row mt-2">
-          <div class="col-12 text-right">
-              <button [disabled]="!currentUser" (click)="checkout()" class="btn btn-standard float-right">Checkout</button>
-          </div>
-      </div>
-      <div [hidden]="currentUser" class="row">
-          <div class="col-12 text-right">
-              <small>You have to be signed in to checkout.</small>
-          </div>
-      </div>
-  </div>
+    <div class="row mt-2">
+        <div class="col-12 text-center">
+            <h1>My Cart</h1>
+            <hr>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12" *ngIf="productInOrders?.length > 0; else tbody_empty">
+            <table class="table table-responsive-md table-striped">
+                <thead>
+                    <tr>
+                        <th class="text-center" scope="col">Photo</th>
+                        <th scope="col">Name</th>
+                        <th class="text-center" scope="col">Size</th>
+                        <th class="text-center" style="min-width: 115px;" scope="col">Quantity</th>
+                        <th class="text-center" scope="col">Price</th>
+                        <th class="text-center" scope="col">Subtotal</th>
+                        <th class="text-center" scope="col">Action</th>
+                    </tr>
+                </thead>
+                    <tbody>
+                        <tr *ngFor="let productInOrder of productInOrders">
+                            <td class="align-middle text-center" style="width: 75px;" scope="row">
+                                <a routerLink="/product/{{productInOrder.productId}}">
+                                    <img class="img-thumbnail product-thumbnail" src="{{productInOrder.productIcon}}" alt="{{productInOrder.productName}}">
+                                </a>
+                            </td>
+                            <td class="align-middle product-name">
+                                <a routerLink="/product/{{productInOrder.productId}}">
+                                    <span>{{productInOrder.productName}}</span>
+                                </a>
+                            </td>
+                            <td class="align-middle text-center">
+                              {{productInOrder.productSize}} M
+                            </td>
+                            <td class="align-middle text-center">
+                                <div class="btn-quantity btn-standard" (click)="minusOne(productInOrder)">-</div>
+                                <span class="mx-2">{{productInOrder.count}}</span>
+                                <div class="btn-quantity btn-standard" (click)="addOne(productInOrder)">+</div>
+                            </td>
+                            <td class="align-middle text-center">
+                                {{productInOrder.productPrice}} RSD
+                            </td>
+                            <td class="align-middle text-center">
+                                {{productInOrder.productPrice * productInOrder.count}} RSD
+                            </td>
+                            <td class="align-middle text-center">
+                                <a (click)="remove(productInOrder)" routerLink="./">Remove</a>
+                            </td>
+                        </tr>
+                    </tbody>
+            </table>
+        </div>
+        <ng-template #tbody_empty>
+            <div class="col-12 text-center">
+                <h4>Cart is currently empty</h4>
+            </div>
+        </ng-template>
+    </div>
+    <div *ngIf="productInOrders?.length > 0">
+        <div class="row">
+            <div class="col-12 text-right">
+                <h5 style="display: inline;">Total: {{total}} RSD</h5>
+            </div>
+        </div>
+        <div class="row mt-2">
+            <div class="col-12 text-right">
+                <button [disabled]="!currentUser" (click)="checkout()" class="btn btn-standard float-right">Checkout</button>
+            </div>
+        </div>
+        <div [hidden]="currentUser" class="row">
+            <div class="col-12 text-right">
+                <small>You have to be signed in to checkout.</small>
+            </div>
+        </div>
+    </div>
 </div>

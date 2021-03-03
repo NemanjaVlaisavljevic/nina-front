@@ -38,6 +38,7 @@ body {
 .btn-standard:focus {
   background-color: #e4ad96;
   color: #123D6A;
+  box-shadow: 0 0 8px rgba(171, 59, 97, 0.6);
 }
 
 .btn-standard:disabled , .btn-standard:disabled:hover {

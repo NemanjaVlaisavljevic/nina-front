@@ -19,9 +19,8 @@ export class OrderDetailComponent implements OnInit {
   currentUserSubscription : Subscription;
   currentUser : JwtResponse;
 
-  constructor(private orderService : OrderService,
-    private activateRoute : ActivatedRoute,
-    private userService : UserService) { }
+  constructor(private orderService : OrderService, private userService : UserService,
+    private activateRoute : ActivatedRoute) { }
 
   ngOnInit(): void {
     this.order$ = this.orderService.showOneOrder(+this.activateRoute.snapshot.paramMap.get('id'));

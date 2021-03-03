@@ -1,60 +1,59 @@
 <div class="container-fluid">
-  <div class="row mt-2">
-      <div class="col-12 text-center">
-          <h1>Orders</h1>
-          <hr>
-      </div>
-  </div>
-  <div class="row">
-      <div class="col-12">
-          <table class="table table-responsive-lg table-striped">
-              <thead>
-                  <tr>
-                      <th scope="col text-center" style="max-width: 50px;">#</th>
-                      <th scope="col">Customer Name</th>
-                      <th scope="col">Customer Email</th>
-                      <th scope="col">Customer phone</th>
-                      <th scope="col">City</th>
-                      <th scope="col">Street and Number</th>
-                      <th scope="col">Total</th>
-                      <th scope="col">Order Data</th>
-                      <th scope="col">Status</th>
-                      <th scope="col">Action</th>
-                  </tr>
-              </thead>
-              <tbody>
-                  <tr *ngFor="let order of page?.content">
-                      <td class="align-middle text-center" scope="row">{{order.orderId}}</td>
-                      <td class="align-middle">{{order.buyerName}} {{order.buyerLastName}}</td>
-                      <td class="align-middle">{{order.buyerEmail}}</td>
-                      <td class="align-middle">{{order.buyerPhone}}</td>
-                      <td class="align-middle">{{order.buyerCity}}</td>
-                      <td class="align-middle">{{order.buyerStreetAndNumber}}</td>
-                      <td class="align-middle">{{order.orderAmount}} RSD</td>
-                      <td class="align-middle">{{order.createTime | date}}</td>
-                      <td class="align-middle">{{orderStatus[order.orderStatus]}}</td>
-                      <td class="align-middle">
-                          <div class="btn-group dropleft">
-                              <button type="button" class="btn btn-standard dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                                Actions
-                              </button>
-                              <div class="dropdown-menu">
-                                  <a *ngIf="!(currentUser.role == role.USER && currentUser.name == order.buyerEmail)" class="dropdown-item" href="" routerLink="/order/{{order.orderId}}">
-                                      Show
-                                  </a>
-                                  <a *ngIf="order.orderStatus == 0" class="dropdown-item" (click)="cancel(order)" routerLink="/">
-                                      Cancel
-                                  </a>
-                                  <a *ngIf="currentUser.role != role.USER && order.orderStatus == 0" class="dropdown-item" (click)="finish(order)" routerLink="./">
-                                      Finish
-                                  </a>
-                              </div>
-                          </div>
-                      </td>
-                  </tr>
-              </tbody>
-          </table>
-      </div>
-  </div>
+    <div class="row mt-2">
+        <div class="col-12 text-center">
+            <h1>Orders</h1>
+            <hr>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-12">
+            <table class="table table-responsive-lg table-striped">
+                <thead>
+                    <tr>
+                        <th scope="col text-center" style="max-width: 50px;">#</th>
+                        <th scope="col">Customer Name</th>
+                        <th scope="col">Customer Email</th>
+                        <th scope="col">Customer phone</th>
+                        <th scope="col">City</th>
+                        <th scope="col">Street and Number</th>
+                        <th scope="col">Total</th>
+                        <th scope="col">Order Data</th>
+                        <th scope="col">Status</th>
+                        <th scope="col">Action</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr *ngFor="let order of page?.content">
+                        <td class="align-middle text-center" scope="row">{{order.orderId}}</td>
+                        <td class="align-middle">{{order.buyerName}} {{order.buyerLastName}}</td>
+                        <td class="align-middle">{{order.buyerEmail}}</td>
+                        <td class="align-middle">{{order.buyerPhone}}</td>
+                        <td class="align-middle">{{order.buyerCity}}</td>
+                        <td class="align-middle">{{order.buyerStreetAndNumber}}</td>
+                        <td class="align-middle">{{order.orderAmount}} RSD</td>
+                        <td class="align-middle">{{order.createTime | date}}</td>
+                        <td class="align-middle">{{orderStatus[order.orderStatus]}}</td>
+                        <td class="align-middle">
+                            <div class="btn-group dropleft">
+                                <button type="button" class="btn btn-standard dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                  Actions
+                                </button>
+                                <div class="dropdown-menu">
+                                    <a *ngIf="!(currentUser.role == role.USER && currentUser.name == order.buyerEmail)" class="dropdown-item" href="" routerLink="/order/{{order.orderId}}">
+                                        Show
+                                    </a>
+                                    <a *ngIf="order.orderStatus == 0" class="dropdown-item" (click)="cancel(order)" routerLink="/">
+                                        Cancel
+                                    </a>
+                                    <a *ngIf="currentUser.role != role.USER && order.orderStatus == 0" class="dropdown-item" (click)="finish(order)" routerLink="./">
+                                        Finish
+                                    </a>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
 </div>
-<app-pagination [currentPage]="page"></app-pagination>
