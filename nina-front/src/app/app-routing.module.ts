@@ -20,7 +20,9 @@ const routes: Routes = [
   {path: 'product/:id', component: ProductDetailComponent},
 /*   {path: 'category/:id', component: CardComponent},
   {path: 'category', component: CardComponent},
-  {path : 'login' , component : LoginComponent}, */
+
+  {path : 'login' , component : LoginComponent},
+  */
   {path : 'logout' , component : LoginComponent},
   {path : 'register' , component : SignupComponent},
   {path : 'profile' , component : UserEditComponent , canActivate : [AuthGuard]},
@@ -31,9 +33,9 @@ const routes: Routes = [
   {path : 'admin/product' , component : ProductListComponent ,
    canActivate : [AuthGuard], data: {roles: [UserRole.ADMIN]}},
   {path : 'admin/product/new' , component : ProductEditComponent ,
-    canActivate : [AuthGuard] , data : {role : [UserRole.ADMIN]}},
+    canActivate : [AuthGuard] , data : {roles : [UserRole.ADMIN]}},
   {path : 'admin/product/:id/edit' , component : ProductEditComponent ,
-    canActivate : [AuthGuard] , data : {role : [UserRole.ADMIN]}}
+    canActivate : [AuthGuard] , data : {roles : [UserRole.ADMIN]}}
 ];
 
 @NgModule({

@@ -68,7 +68,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
           }
           this.model.username = '';
           this.model.password = '';
-          //this.router.navigateByUrl(this.returnUrl);
+          this.router.navigateByUrl(this.returnUrl);
         }
         else {
           this.isInvalid = true;

@@ -1,0 +1,52 @@
+.container-fluid {
+  color: #AB3B61;
+}
+
+.table thead th {
+  border-bottom: 1px solid #BBB2B5;
+}
+
+.table th {
+  color: #AB3B61;
+  border-top: 1px solid #BBB2B5;
+}
+
+tbody{
+  color: #AB3B61;
+}
+
+tbody tr:nth-of-type(odd){
+  background-color: #EDE2DC;
+}
+
+tbody tr:nth-of-type(even){
+  background-color: #e5d5cc;
+}
+
+tbody tr:last-child{
+  border-bottom: 1px solid #BBB2B5;
+}
+
+tbody td {
+  border-top: 0px;
+}
+
+a, a:visited {
+  color: #AB3B61;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #123D6A;
+  text-decoration: none;
+}
+
+.dropdown-menu {
+  background-color: #EDD8CF;
+  border: 1px solid #BBB2B5;
+  color: #AB3B61;
+}
+
+.dropdown-item:hover, .dropdown-item:focus {
+  background-color: #EDE2DC;
+}

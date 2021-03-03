@@ -48,7 +48,7 @@ export class LoginComponent implements OnInit {
             if(jwtResponse.role != UserRole.USER){
               this.returnUrl = '/admin';
             }
-            //this.router.navigateByUrl(this.returnUrl);
+          //  this.router.navigateByUrl(this.returnUrl);
           }else{
             this.isLogout = false;
             this.isInvalid = true;

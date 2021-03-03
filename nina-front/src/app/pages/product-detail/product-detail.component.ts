@@ -48,7 +48,6 @@ export class ProductDetailComponent implements OnInit {
   }
 
   addToCart() : void {
-    console.log('Current size of item added : ' + this.productSizeInNumber);
     this.productSize = this.productSizeInNumber;
     this.cartService
         .addItem(new ProductInOrder(this.productInfo , this.count , this.productSize))

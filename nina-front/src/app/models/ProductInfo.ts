@@ -1,5 +1,6 @@
 import { logging } from "protractor";
 import { ProductInOrder } from "./ProductInOrder";
+import { ProductSizeStock } from "./ProductSizeStock";
 
 export class ProductInfo{
   productId : number;
@@ -12,7 +13,7 @@ export class ProductInfo{
   categoryType : number;
   createTime: string;
   updateTime: string;
-
+  productSizes : ProductSizeStock[];
 
   constructor(productInOrder? : ProductInOrder){
       if(productInOrder){

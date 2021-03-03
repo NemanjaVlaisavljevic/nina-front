@@ -1,68 +1,25 @@
 <a routerLink="/product/{{product.productId}}">
-<div class="card mx-sm-auto h-100" style="border-radius: .5rem;min-height: 330px;min-width: 270px">
-    <img height="200px" width="200px" class="card-img-top" src="{{product.productIcon}}" alt="{{product.productName}}">
-    <div class="row  py-2 h-100">
-      <div class="col text-left" style="text-overflow: ellipsis;overflow: hidden;white-space: nowrap;width: 233px;">
-        <span style="text-overflow: ellipsis;overflow: hidden;white-space: nowrap;width: 233px; font-size: large;">{{product.productName}}</span>
-        <!-- <h5>{{product.productName}}</h5> -->
+  <div class="card mx-sm-auto h-100 rounded">
+    <img class="card-img-top rounded product-image mx-auto d-block" src="{{product.productIcon}}" alt="{{product.productName}}">
+    <div class="row py-2 h-100">
+      <div class="col text-left product-name">
+        <span>{{product.productName}}</span>
       </div>
-      
-      <!-- <h5 style="overflow: hidden;">aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa</h5> -->
     </div>
+
     <div class="row mt-auto h-100 ">
       <div class="col-6 h-100">
-        <div *ngIf="(product.productStatus != 0 || product.productStock <= 0); else stockElse">
-            
-          <p class="card-text">Out of stock</p>
-        </div>
-        <ng-template #stockElse>
-          <p class="card-text">{{product.productStock}} in stock</p>
-        </ng-template>
-      </div>
-      <div class="col-6 text-right">
-        <p class="card-text">{{product.productPrice}} RSD</p>
-      </div>
-    </div>  
-    
-    
-    <!-- <div class="product-info-container h-100">
-        <div class="product-info-name">
-          <h5>{{product.productName}}</h5>
-        </div>
-        <div class="product-info-stock">
           <div *ngIf="(product.productStatus != 0 || product.productStock <= 0); else stockElse">
-            
+
             <p class="card-text">Out of stock</p>
           </div>
           <ng-template #stockElse>
             <p class="card-text">{{product.productStock}} in stock</p>
           </ng-template>
         </div>
-        <div class="product-info-price text-right">
+        <div class="col-6 text-right">
           <p class="card-text">{{product.productPrice}} RSD</p>
-        </div>
-      </div>   -->
-      <!-- <div class="row w-100">
-        <div class="col-lg-12">
-          <h5>{{product.productName}}</h5>
         </div>
       </div>
-      <div class="row fixed-bottom">
-        <div class="col-lg-12">
-          <p class="card-text">{{product.productPrice}} RSD</p>
-        </div>
-      </div> -->
-      <!-- <div [hidden]="!showDetails">
-        <div class="text-left">
-            <p class="card-test"><strong><span style="color:black;">Description</span>: </strong>{{product.productDescription}}</p>
-            <p class="card-text"><strong><span style="color:black;">Price</span>: </strong>{{product.productPrice}} RSD</p>
-            <p class="card-text"><strong><span style="color:black;">Stock</span>: </strong>{{product.productStock}}</p>
-          </div>
-          <br>
-          <a routerLink="/product/{{product.productId}}" *ngIf="product.productStatus == 0; else offBlock"
-             class="btn btn-dark btn-lg"
-          ><p style="color:#DB7093;">Add to cart!</p></a>
-          <ng-template #offBlock><a class="btn btn-secondary btn-lg disabled">Unavailable</a></ng-template>
-      </div> -->
-</div>
+    </div>
 </a>

@@ -79,9 +79,25 @@ body {
 
 .form-control::placeholder {
   color: #AB3B61;
-  opacity: 1; 
+  opacity: 1;
 }
 
 .form-check-input {
   background-color: #EDE2DC;
+}
+
+.btn-quantity {
+  display: inline-block;
+  border-radius: 50%;
+  font-size: 18px;
+  height: 25px;
+  width: 25px;
+  padding: 0px;
+  line-height: 22px;
+  text-align: center;
+  user-select:none;
+}
+
+.btn-quantity:hover {
+  cursor: pointer;
 }

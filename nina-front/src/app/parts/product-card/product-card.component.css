@@ -1,8 +1,6 @@
-h4 {
-    font-size: calc(100% + 0.2vw);
-}
-
 .card {
+    min-height: 330px;
+    min-width: 270px;
     max-width: 275px;
     padding: 20px;
     background-color: #EDE2DC;
@@ -10,30 +8,17 @@ h4 {
     color: #AB3B61;
 }
 
-.product-info-container {
-    padding-top: 10px;
-    padding-bottom: 0px;
-    padding-left: 0px;
-    padding-right: 0px;
-    height: 100%;
-    display: grid;
-    grid-template-rows: minmax(1px, auto) 1fr 20px;
-    grid-template-columns: 20% 20% 20% 20% 20%;
+.product-image {
+  max-width: 200px;
+  max-height: 200px;
 }
 
-.product-info-name {
-    grid-column: 1 / 6;
-    grid-row: 1 / 2;
-}
-
-.product-info-stock {
-    grid-column: 1 / 4;
-    grid-row: 3 / 4;
-}
-
-.product-info-price {
-    grid-column: 4 / 6;
-    grid-row: 3 / 4;
+.product-name {
+  text-overflow: ellipsis;
+  overflow: hidden;
+  white-space: nowrap;
+  width: 233px;
+  font-size: large;
 }
 
 a, a:hover, a:visited {
