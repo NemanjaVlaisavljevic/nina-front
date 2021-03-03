@@ -30,7 +30,7 @@ export class ProductEditComponent implements OnInit, AfterContentChecked  {
       this.productService.getProductDetail(this.productId).subscribe(data => {
         this.product = data;
       });
-    };
+    }
   }
 
   update(){

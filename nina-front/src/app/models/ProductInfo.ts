@@ -1,4 +1,5 @@
 import { logging } from "protractor";
+import { ProductIcon } from "./ProductIcon";
 import { ProductInOrder } from "./ProductInOrder";
 import { ProductSizeStock } from "./ProductSizeStock";
 
@@ -8,7 +9,7 @@ export class ProductInfo{
   productPrice : number;
   productStock : number;
   productDescription : string;
-  productIcon : string;
+  productIcons : ProductIcon[];
   productStatus : number;
   categoryType : number;
   createTime: string;
@@ -22,7 +23,6 @@ export class ProductInfo{
         this.productPrice = productInOrder.productPrice;
         this.productStock = productInOrder.productStock;
         this.productDescription = productInOrder.productDescription;
-        this.productIcon = productInOrder.productIcon;
         this.categoryType = productInOrder.categoryType;
         this.productStatus = 0;
       }else{
@@ -31,7 +31,7 @@ export class ProductInfo{
             this.productPrice = 20;
             this.productStock = 100;
             this.productDescription = '';
-            this.productIcon = '';
+            this.productIcons = [];
             this.categoryType = 0;
             this.productStatus = 0;
       }
