@@ -2,8 +2,10 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { CookieService } from 'ngx-cookie-service';
 import { ProductSize } from 'src/app/enums/ProductSize';
+import { ProductIcon } from 'src/app/models/ProductIcon';
 import { ProductInfo } from 'src/app/models/ProductInfo';
 import { ProductInOrder } from 'src/app/models/ProductInOrder';
+import { ProductSizeStock } from 'src/app/models/ProductSizeStock';
 import { CartService } from 'src/app/services/cart.service';
 import { ProductService } from 'src/app/services/product.service';
 import { UserService } from 'src/app/services/user.service';
@@ -19,7 +21,9 @@ export class ProductDetailComponent implements OnInit {
   productInfo : ProductInfo;
   count : number;
   productSizeInNumber : number;
+  selectedProductSizeStock : ProductSizeStock;
   productSize : number;
+  imageSource : string;
 
   constructor(private productService : ProductService,
     private cartService : CartService,
@@ -33,18 +37,60 @@ export class ProductDetailComponent implements OnInit {
     this.getProduct();
     this.count = 1;
     this.title = 'Product Details';
-
+    //this.src = this.productInfo?.productIcon;
   }
 
   increaseCount() {
-    const max = this.productInfo.productStock;
-    if(this.count < max)
-      this.count++;
+    // CATEGORY IS CLOTHING
+    if(this.productInfo.categoryType === 0) {
+      if(this.selectedProductSizeStock === undefined) return;
+      if(this.count < this.selectedProductSizeStock.currentSizeStock)
+        this.count++;
+    }
+    // CATEGORY IS NOT CLOTHING
+    else {
+      if(this.count < this.productInfo.productStock)
+        this.count++;
+    }
+  }
+
+  validateIncreaseButton() {
+    // CATEGORY IS CLOTHING
+    if(this.productInfo.categoryType === 0) {
+      if(this.selectedProductSizeStock === undefined) return false;
+      return this.count !== this.selectedProductSizeStock.currentSizeStock;
+    }
+    // CATEGORY IS NOT CLOTHING
+    else {
+      return this.count !== this.productInfo.productStock;
+    }
+  }
+
+  validateDecreaseButton() {
+    return this.count > 1;
   }
 
   decreaseCount() {
     if(this.count > 1)
       this.count--;
+  }
+
+ /*  hover(link){
+    if(this.src !== link)
+      this.src = link;
+  }
+ */
+
+  onHover(image: ProductIcon) {
+    this.imageSource = image.productIcon;
+  }
+
+  // XL - 0, L - 1, M - 2, S - 3
+  selectSize(size: string) {
+    if(this.selectedProductSizeStock?.productSize !== size) {
+      this.selectedProductSizeStock = this.productInfo.productSizes.find(x => x.productSize === size);
+      this.count = 1;
+    }
   }
 
   addToCart() : void {
@@ -66,9 +112,49 @@ export class ProductDetailComponent implements OnInit {
     const id = this.activeRoute.snapshot.paramMap.get('id');
     this.productService.getProductDetail(+id).subscribe(data => {
       this.productInfo = data;
+      this.productInfo.productSizes = this.sortSizes(this.productInfo.productSizes);
+      this.imageSource = this.getFirstImage();
+      //this.src = this.productInfo.productIcon;
+      console.log(this.productInfo.productIcons);
     },error => {
       console.log('Couldnt get product');
     });
+  }
+
+  getProductSizes() {
+    return this.productInfo.productSizes.filter(x => x.currentSizeStock > 0);
+  }
+
+  getProductImages() {
+    if(this.productInfo === undefined) return;
+    return this.productInfo.productIcons;
+  }
+
+  getFirstImage() {
+    return this.productInfo.productIcons[0].productIcon;
+  }
+
+  sortSizes(sizes: ProductSizeStock[]) {
+    var sortedSizes : ProductSizeStock[] = [];
+    if(sizes === undefined) return sortedSizes;
+
+    var size = sizes.find(x => x.productSize === ProductSize.S);
+    if(size !== undefined)
+      sortedSizes.push(size);
+
+    size = sizes.find(x => x.productSize === ProductSize.M);
+    if(size !== undefined)
+      sortedSizes.push(size);
+
+    size = sizes.find(x => x.productSize === ProductSize.L);
+    if(size !== undefined)
+      sortedSizes.push(size);
+
+    size = sizes.find(x => x.productSize === ProductSize.XL);
+    if(size !== undefined)
+      sortedSizes.push(size);
+
+    return sortedSizes;
   }
 
   validateCount() : void {

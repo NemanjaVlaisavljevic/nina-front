@@ -22,6 +22,10 @@ body {
   box-sizing: border-box;
 }
 
+.container, .container-fluid {
+  color: #AB3B61;
+}
+
 .btn-standard {
   background-color: #EDC8B8;
   color: #AB3B61;
@@ -87,6 +91,11 @@ body {
   background-color: #EDE2DC;
 }
 
+.btn {
+  outline: 0;
+  box-shadow: 0 0 0 0;
+}
+
 .btn-quantity {
   display: inline-block;
   border-radius: 50%;
@@ -101,4 +110,18 @@ body {
 
 .btn-quantity:hover {
   cursor: pointer;
+}
+
+.btn-quantity-disabled, .btn-quantity-disabled:hover {
+  background-color: #CDBFBE;
+  color: #C4788C;
+  display: inline-block;
+  border-radius: 50%;
+  font-size: 18px;
+  height: 25px;
+  width: 25px;
+  padding: 0px;
+  line-height: 22px;
+  text-align: center;
+  user-select:none;
 }

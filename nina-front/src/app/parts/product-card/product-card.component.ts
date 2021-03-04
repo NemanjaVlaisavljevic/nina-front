@@ -1,7 +1,5 @@
-import { Component, OnInit, Input, HostListener } from '@angular/core';
+import { Component, OnInit, Input } from '@angular/core';
 import { ProductInfo } from 'src/app/models/ProductInfo';
-
-declare var $: any;
 
 @Component({
   selector: 'app-product-card',
@@ -15,21 +13,12 @@ export class ProductCardComponent implements OnInit {
 
   showDetails: boolean = false;
 
-  constructor() { 
-    console.log(this.product)
-  }
+  constructor() { }
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void { }
 
-  @HostListener('mouseenter')
-  onMouseEnter(){
-    this.showDetails = true;
-  }
-
-  @HostListener('mouseleave')
-  onMouseLeave(){
-    this.showDetails = false;
+  getFirstImage() {
+    return this.product.productIcons[0].productIcon;
   }
 
 }

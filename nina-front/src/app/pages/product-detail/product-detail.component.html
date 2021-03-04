@@ -3,15 +3,13 @@
     <div class="col-12 col-sm-6 text-center">
       <div class="row">
         <div class="col-12">
-          <img class="img-fluid rounded mr-1" style="max-height: 500px;" src="{{productInfo?.productIcons[0].productIcon}}" >
+          <img class="img-fluid image-main rounded mr-1" [src]="imageSource" >
         </div>
       </div>
       <div class="row mt-2">
         <div class="col-12">
-          <div class="image-select-container">
-            <img class="p-1 image-select" src="{{productInfo?.productIcons[0].productIcon}}" >
-            <img class="p-1 image-select" src="{{productInfo?.productIcons[0].productIcon}}" >
-            <img class="p-1 image-select" src="{{productInfo?.productIcons[0].productIcon}}" >
+          <div class="image-select-container justify-content-center">
+            <img *ngFor="let image of getProductImages()" [ngClass]="{'image-select-active': imageSource === image.productIcon}" class="img-fluid m-1 rounded image-select"  src="{{image.productIcon}}" (mouseenter)="onHover(image)">
         </div>
       </div>
     </div>
@@ -23,146 +21,69 @@
             <h5 style="flex: 1;">{{productInfo?.productName}}</h5>
             <h6>{{productInfo?.productPrice}} RSD</h6>
             <hr/>
-            <h6>{{productInfo?.productDescription}}</h6>
-            <label *ngIf = "productInfo?.categoryType === 0" for="productSize"><h4>Size </h4>
-              <select [(ngModel)]="productSizeInNumber" name = "productSizeInNumber" required>
-                <option [ngValue]=0>XL</option>
-                <option [ngValue]=1>L</option>
-                <option [ngValue]=2>M</option>
-                <option [ngValue]=3>S</option>
-              </select>
-            </label>
+          </div>
+        </div>
+      </div>
+      <div *ngIf="productInfo?.categoryType === 0 && productInfo?.productStatus == 0 && productInfo?.productStock > 0" class="row mb-2">
+        <div class="col-12">
+          <div class="container-size" >
+            <div *ngFor="let size of getProductSizes()" 
+              [ngClass]="{'size': selectedProductSizeStock?.productSize !== size.productSize, 'size-active': selectedProductSizeStock?.productSize === size.productSize}"
+              (click)="selectSize(size.productSize)">
+              {{size.productSize}}
+            </div>
           </div>
         </div>
       </div>
       <div class="row">
         <div class="col-12">
-          <!-- <button type="button" class="btn-quantity">-</button> -->
-          <!-- <span class="text-center">
-            <button type="button" class="btn-quantity">+</button>
-          </span> -->
           <div class="container-quantity">
-            <div *ngIf="(productInfo?.productStatus != 0 || productInfo?.productStock <= 0); else stockElse">
-
+            <!-- OUT OF STOCK -->
+            <div *ngIf="(productInfo?.productStatus != 0 || productInfo?.productStock <= 0); else hasStock">
               <p>Out of stock</p>
             </div>
-            <ng-template #stockElse>
-              <div class="btn-quantity btn-standard" (click)="decreaseCount()">-</div>
+            <!-- HAS STOCK -->
+            <ng-template #hasStock>
+              <div [ngClass]="{'btn-quantity ': validateDecreaseButton(), 'btn-quantity-disabled ': !validateDecreaseButton()}" 
+                class="btn-standard" (click)="decreaseCount()">-</div>
               <span class="mx-2">{{count}}</span>
-              <div class="btn-quantity btn-standard" (click)="increaseCount()">+</div>
-              <small class="ml-2">{{productInfo?.productStock}} available</small>
+              <div [ngClass]="{'btn-quantity ': validateIncreaseButton(), 'btn-quantity-disabled ': !validateIncreaseButton()}" 
+                class="btn-standard" (click)="increaseCount()">+</div>
+
+              <!-- CATEGORY IS NOT CLOTHING -->
+              <small *ngIf='productInfo?.categoryType !== 0; else splitStock' class="ml-2">{{productInfo?.productStock}} available</small>
+              <!-- CATEGORY IS CLOTHING -->
+              <ng-template #splitStock>
+                <!-- SIZE SELECTED -->
+                <small *ngIf='selectedProductSizeStock !== undefined; else selectedStockUndefined' class="ml-2">
+                  {{selectedProductSizeStock?.currentSizeStock}} available
+                </small>
+                <!-- SIZE NOT SELECTED -->
+                <ng-template #selectedStockUndefined>
+                  <small class="ml-2">Select a size to view it's stock</small>
+                </ng-template>
+              </ng-template>
             </ng-template>
-
-
-            <!-- <div class="btn-quantity" (click)="decreaseCount()">-</div>
-            <span class="mx-2">{{count}}</span>
-            <div class="btn-quantity" (click)="increaseCount()">+</div>
-            <small class="ml-2">{{productInfo?.productStock}} available</small> -->
           </div>
-
         </div>
       </div>
       <div class="row mt-3" *ngIf="(productInfo?.productStatus != 0 || productInfo?.productStock <= 0); else addElse"></div>
       <ng-template #addElse>
         <div class="row mt-3 container-add">
           <div class="col-12">
-              <button class="btn btn-standard" [disabled]="productSizeInNumber === undefined && productInfo.categoryType === 0" (click)="addToCart()">Add to Cart</button>
+              <button [disabled]="selectedProductSizeStock === undefined && productInfo?.categoryType === 0" class="btn btn-standard" (click)="addToCart()">Add to Cart</button>
           </div>
           <div class="col-12">
             <small>Subtotal: {{count * productInfo?.productPrice}} RSD</small>
           </div>
+          <div class="col-12">
+            <hr/>
+          </div>
+          <div class="col-12">
+            <h6>{{productInfo?.productDescription}}</h6>
+          </div>
         </div>
       </ng-template>
-
-
     </div>
   </div>
 </div>
-
-
-<!--
-<div class="container-grid mt-4">
-  <div class="product-grid">
-    <div class="product-images">
-      <div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
-        <ol class="carousel-indicators">
-          <li data-target="#carouselExampleIndicators" data-slide-to="0" class="active"></li>
-          <li data-target="#carouselExampleIndicators" data-slide-to="1"></li>
-
-        </ol>
-        <div class="carousel-inner">
-          <div class="carousel-item active">
-
-              <div class="product-image" style="background-image: url({{productInfo?.productIcon}});">
-
-              </div>
-
-          </div>
-
-        </div>
-        <a class="carousel-control-prev" href="#carouselExampleIndicators" role="button" data-slide="prev">
-          <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-          <span class="sr-only">Previous</span>
-        </a>
-        <a class="carousel-control-next" href="#carouselExampleIndicators" role="button" data-slide="next">
-          <span class="carousel-control-next-icon" aria-hidden="true"></span>
-          <span class="sr-only">Next</span>
-        </a>
-      </div>
-    </div>
-    <div class="product-details">
-      <h5 style="flex: 1;">{{productInfo?.productName}}</h5>
-      <h6>{{productInfo?.productPrice}} RSD</h6>
-      <p>Out of stock</p>
-      <hr/>
-      <h6>{{productInfo?.productDescription}}</h6>
-    </div>
-  </div>
-</div> -->
-
-<!--
-<div class="row text-center justify-content-center">
-  <div class="col-lg-3.5 ">
-    <div class="card mb-4 " style="width: 30rem;">
-      <img height="40%" class="card-img-top" src="{{productInfo?.productIcon}}">
-      <div class="card-body">
-        <h4 class="card-title ">{{productInfo?.productName}}</h4>
-        <form name="form" #form='ngForm' (ngSubmit)="productInfo?.productStatus == 0 && addToCart()">
-          <div class="text-left">
-            <input hidden name="productId" [value]=productInfo?.productId>
-            <p class="card-test"><strong><span style="color:pink;">Description</span>: </strong>{{productInfo?.productDescription}}</p>
-            <p class="card-text">
-              <strong><span style="color:pink;">Price</span>: </strong>
-              <label id="price">{{productInfo?.productPrice }} RSD</label>
-            </p>
-            <p class="card-text"><strong><span style="color:pink;">Stock</span>: </strong>{{productInfo?.productStock}}</p>
-
-            <label class="card-text">
-              <strong><span style="color:pink;">Quantity</span>: </strong>
-              <input [(ngModel)]=count
-                     (change)="validateCount()"
-                     type="number"
-                     name="count"
-                     required
-                     min="1"
-                     [max]=productInfo?.productStock
-              >
-            </label>
-
-
-            <p class="card-text"><strong><span style="color:pink;">Subtotal</span>: </strong>
-              <label id="subtotal">{{count * productInfo?.productPrice}} RSD</label>
-            </p>
-          </div>
-          <button type="submit" [disabled]="!form.form.valid" *ngIf="productInfo?.productStatus == 0; else offBlock"
-                  class="btn btn-dark btn-lg"
-          ><p style="color:#DB7093;">Add to cart!</p>
-          </button>
-          <ng-template #offBlock><a class="btn btn-secondary btn-lg disabled">Unavailable</a></ng-template>
-        </form>
-
-      </div>
-    </div>
-  </div>
-</div>
- -->

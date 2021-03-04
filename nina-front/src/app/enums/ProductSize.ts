@@ -1,3 +1,3 @@
 export enum ProductSize {
- XL , L , M , S
+ XL = "XL" , L = "L" , M = "M" , S = "S"
 }

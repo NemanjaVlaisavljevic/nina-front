@@ -3,68 +3,81 @@
     margin: 0px;
 }
 
-.container-grid {
+.container-quantity, .container-add, .container-size {
+    padding: 0 1.5rem 0 1.5rem;
+}
 
+.container-grid {
     display: grid;
     grid-template-columns: minmax(0px, 1fr) auto minmax(0px, 1fr);
     grid-template-rows: auto;
 }
 
+.image-main {
+    max-height: 500px;
+}
+
 .image-select-container {
     display: flex;
-    flex-wrap:wrap;
-    justify-items: stretch;
+    flex-wrap: wrap;
+}
+
+.image-select {
+    max-height: 50px;
+    cursor: pointer;
 }
 
 @media only screen and (max-width: 576px) {
     .image-select {
-        height: 50px;
-        width: 16.6%;
+        max-width: 16.6%;
     }
 }
 
 @media only screen and (min-width: 576px) {
     .image-select {
-        height: 50px;
-        width: 20%;
+        max-width: 20%;
     }
 }
 
 @media only screen and (min-width: 768px) {
     .image-select {
-        height: 50px;
-        width: 12.5%;
+        max-width: 16.6%;
     }
 }
 
 @media only screen and (min-width: 992px) {
     .image-select {
-        height: 50px;
-        width: 12.5%;
+        max-width: 16.6%;
     }
 }
 
 @media only screen and (min-width: 1200px) {
     .image-select {
-        height: 50px;
-        width: 12.5%;
+        max-width: 16.6%;
     }
 }
 
-.container-quantity {
-    padding: 0 1.5rem 0 1.5rem;
-
+.image-select-active {
+    border: 2px solid #AB3B61;
 }
 
-.container-add {
-    padding: 0 1.5rem 0 1.5rem;
+.size, .size-active {
+    display: inline-block;
+    width: 25px;
+    height: 25px;
+    margin-right: 0.75rem;
+    text-align: center !important;
+    user-select: none;
 }
 
+.size {
+    background-color: #EDC8B8;
+    transition: 0.2s;
+}
 
-
-.btn {
-    outline: 0;
-    box-shadow: 0 0 0 0;
+.size-active, .size:hover {
+    background-color: #e4ad96;
+    cursor: pointer;
 }
 
 .product-grid {
@@ -80,48 +93,8 @@
     display: flexbox;
     word-wrap: break-word;
     flex-direction: column;
-    padding: 1.5rem;
-
-}
-
-.container {
-    color: #AB3B61;
-}
-
-
-
-.product-images {
-    grid-column: 1/2;
-    margin: 20px;
-    max-width: 40vw;
-    max-height: auto;
-
-}
-
-.carousel {
-    max-width: 40vw;
-    height: auto;
-    max-height: auto;
-}
-
-.carousel-inner {
-    max-width: 40vw;
-    height: auto;
-    max-height: auto;
-}
-
-.carousel-item {
-    max-width: 40vw;
-    max-height: auto;
-
-}
-
-.product-image {
-    max-width: 40vw;
-    max-height: 60vw;
-
-    background-position-x: center;
-    background-position-y: top;
-    background-repeat: no-repeat;
-    background-size: contain !important;
+    padding-top: 1.5rem;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
+    padding-bottom: 0px;
 }

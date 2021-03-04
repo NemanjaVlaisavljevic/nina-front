@@ -9,18 +9,6 @@
 }
 
 .product-image {
-<<<<<<< HEAD
-  max-width: 200px;
-  max-height: 200px;
-}
-
-.product-name {
-  text-overflow: ellipsis;
-  overflow: hidden;
-  white-space: nowrap;
-  width: 233px;
-  font-size: large;
-=======
     max-width: 200px;
     max-height: 200px;
 }
@@ -31,7 +19,6 @@
     white-space: nowrap;
     width: 233px;
     font-size: large;
->>>>>>> e814dd99fd97d255bd43241d209df13239347d62
 }
 
 a, a:hover, a:visited {

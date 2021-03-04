@@ -1,4 +1,5 @@
 import { logging } from "protractor";
+import { ProductSize } from "../enums/ProductSize";
 import { ProductIcon } from "./ProductIcon";
 import { ProductInOrder } from "./ProductInOrder";
 import { ProductSizeStock } from "./ProductSizeStock";
@@ -25,6 +26,7 @@ export class ProductInfo{
         this.productDescription = productInOrder.productDescription;
         this.categoryType = productInOrder.categoryType;
         this.productStatus = 0;
+        this.productSizes = [];
       }else{
             this.productId = null;
             this.productName = '';
@@ -34,6 +36,7 @@ export class ProductInfo{
             this.productIcons = [];
             this.categoryType = 0;
             this.productStatus = 0;
+            this.productSizes = [];
       }
   }
 }
