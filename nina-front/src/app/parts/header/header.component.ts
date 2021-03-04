@@ -4,6 +4,7 @@ import { ToastrService } from 'ngx-toastr';
 import { Subscription } from 'rxjs';
 import { UserRole } from 'src/app/enums/UserRole';
 import { JwtResponse } from 'src/app/response/JwtResponse';
+import { LoaderService } from 'src/app/services/loader.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -32,7 +33,7 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   returnUrl = '/';
 
-  constructor(private userService : UserService, private router : Router, private activatedRoute : ActivatedRoute,
+  constructor(private userService : UserService, private router : Router, private activatedRoute : ActivatedRoute, public loaderService : LoaderService,
               private toastrService : ToastrService) { }
 
   ngOnInit(): void {

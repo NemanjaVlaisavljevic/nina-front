@@ -1,3 +1,7 @@
+<div *ngIf="loaderService.isLoading | async" class="loader-container">
+  <div class="spinner-border mx-auto loader" role="status"></div>
+</div>
+
 <nav class="navbar navbar-expand-lg navbar-default">
     <div class="container">
         <a class="navbar-brand" [routerLink]="root">

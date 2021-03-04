@@ -25,6 +25,7 @@ import { FooterComponent } from './parts/footer/footer.component';
 import { HomeComponent } from './pages/home/home.component';
 import { ProductCardComponent } from './parts/product-card/product-card.component';
 import { ProductCardDeckComponent } from './parts/product-card-deck/product-card-deck.component';
+import { LoaderInterceptorService } from './_interceptors/loader-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -55,7 +56,9 @@ import { ProductCardDeckComponent } from './parts/product-card-deck/product-card
   ],
   providers: [CookieService ,
     {provide : HTTP_INTERCEPTORS , useClass : JwtInterceptorService , multi : true},
-    {provide : HTTP_INTERCEPTORS , useClass : ErrorInterceptorService , multi : true}],
+    {provide : HTTP_INTERCEPTORS , useClass : ErrorInterceptorService , multi : true},
+    {provide : HTTP_INTERCEPTORS , useClass : LoaderInterceptorService , multi : true}
+  ],
   bootstrap: [AppComponent, HeaderComponent, FooterComponent]
 })
 export class AppModule { }
