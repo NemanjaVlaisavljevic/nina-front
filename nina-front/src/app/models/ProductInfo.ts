@@ -15,6 +15,7 @@ export class ProductInfo{
   createTime: string;
   updateTime: string;
   productSizes : ProductSizeStock[];
+  sold : number;
 
   constructor(productInOrder? : ProductInOrder){
       if(productInOrder){
