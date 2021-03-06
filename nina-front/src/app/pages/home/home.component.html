@@ -2,30 +2,37 @@
   <hr>
   <div class="row mt-2">
     <div class="col-lg-12 col-md-12">
-      <div class="nav nav-pills nav-fill flex-column flex-sm-row" id="v-pills-tab" role="tablist" aria-orientation="horizontal">
-          <a class="nav-link active" id="v-pills-all-tab" data-toggle="pill" href="#v-pills-all" draggable="false" role="tab" aria-controls="v-pills-all" aria-selected="true">All</a>
-          <a class="nav-link" id="v-pills-clothing-tab" data-toggle="pill" href="#v-pills-clothing" draggable="false" role="tab" aria-controls="v-pills-clothing" aria-selected="false">Clothing</a>
-          <a class="nav-link" id="v-pills-jewlery-tab" data-toggle="pill" href="#v-pills-jewlery" draggable="false" role="tab" aria-controls="v-pills-jewlery" aria-selected="false">Jewlery</a>
-          <a class="nav-link" id="v-pills-mugs-tab" data-toggle="pill" href="#v-pills-mugs" draggable="false" role="tab" aria-controls="v-pills-mugs" aria-selected="false">Mugs</a>
-      </div>
+      <ul ngbNav #nav="ngbNav" class="nav-pills nav-fill flex-column flex-sm-row" orientation="horizontal">
+        <li ngbNavItem="all">
+          <a ngbNavLink draggable="false">All</a>
+          <ng-template ngbNavContent>
+            <app-product-card-deck [products]="page?.content"></app-product-card-deck>
+          </ng-template>
+        </li>
+        <li ngbNavItem="clothing">
+          <a ngbNavLink draggable="false">Clothing</a>
+          <ng-template ngbNavContent>
+            <app-product-card-deck [products]="filterProductsByType(page?.content, 0)"></app-product-card-deck>
+          </ng-template>
+        </li>
+        <li ngbNavItem="jewlery">
+          <a ngbNavLink draggable="false">Jewlery</a>
+          <ng-template ngbNavContent>
+            <app-product-card-deck [products]="filterProductsByType(page?.content, 2)"></app-product-card-deck>
+          </ng-template>
+        </li>
+        <li ngbNavItem="mugs">
+          <a ngbNavLink draggable="false">Mugs</a>
+          <ng-template ngbNavContent>
+            <app-product-card-deck [products]="filterProductsByType(page?.content, 1)"></app-product-card-deck>
+          </ng-template>
+        </li>
+      </ul>
     </div>
   </div>
   <div class="row mt-2 card-row-padding">
-    <div class="col-lg-12 col-md-12 ">
-      <div class="tab-content" id="v-pills-tabContent">
-        <div class="tab-pane fade show active" id="v-pills-all" role="tabpanel" aria-labelledby="v-pills-all-tab">
-          <app-product-card-deck [products]="page?.content"></app-product-card-deck>
-        </div>
-        <div class="tab-pane fade" id="v-pills-clothing" role="tabpanel" aria-labelledby="v-pills-clothing-tab">
-          <app-product-card-deck [products]="filterProductsByType(page?.content, 0)"></app-product-card-deck>
-        </div>
-        <div class="tab-pane fade" id="v-pills-jewlery" role="tabpanel" aria-labelledby="v-pills-jewlery-tab">
-          <app-product-card-deck [products]="filterProductsByType(page?.content, 2)"></app-product-card-deck>
-        </div>
-        <div class="tab-pane fade" id="v-pills-mugs" role="tabpanel" aria-labelledby="v-pills-mugs-tab">
-          <app-product-card-deck [products]="filterProductsByType(page?.content, 1)"></app-product-card-deck>
-        </div>
-      </div>
+    <div class="col-lg-12 col-md-12">
+      <div [ngbNavOutlet]="nav" class="ml-4"></div>
     </div>
   </div>
 </div>

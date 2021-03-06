@@ -16,6 +16,7 @@ export class ProductEditComponent implements OnInit, AfterContentChecked  {
   product = new ProductInfo();
   productId : number;
   isEdit = false;
+  active = 'general';
 
   constructor(private toastrService : ToastrService ,
     private productService : ProductService,

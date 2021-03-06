@@ -40,7 +40,37 @@
                     <a class="nav-item active nav-link " (click)="logout()" routerLink="/">Sign Out</a> -->
                 </ng-container>
                 <ng-template #noUser>
-                    <div class="dropdown">
+                  <div ngbDropdown class="d-inline-block">
+                    <button class="dropdown-link nav-link" id="sign-in-dropdown" ngbDropdownToggle>Sign In</button>
+                    <div ngbDropdownMenu class="dropdown-menu dropdown-menu-right" aria-labelledby="sign-in-dropdown">
+                      <form class="px-4 py-3 w-100" #form='ngForm' (ngSubmit)="onSubmit()">
+                        <div class="form-group">
+                          <label for="email-signin">Email</label>
+                          <input type="email" class="form-control" id="email-signin" name="email" placeholder="email@example.com" [(ngModel)]="model.username" #email="ngModel" autocomplete="email">
+                        </div>
+                        <div class="form-group">
+                          <label for="password-signin">Password</label>
+                          <input type="password" class="form-control" id="password-signin" name="password" placeholder="Password" autocomplete="password" [(ngModel)]="model.password" #password='ngModel'>
+                        </div>
+                        <div class="form-group">
+                          <div class="form-check">
+                            <input type="checkbox" class="form-check-input" id="remember_me" name="remember-me" [(ngModel)]="model.remembered" >
+                            <label class="form-check-label" for="remember_me">
+                              Remember me
+                            </label>
+                          </div>
+                        </div>
+                        <div [hidden]="!isInvalid" class="w-100 text-center sign-in-invalid">
+                          Invalid email/password combination.
+                        </div>
+                        <button type="submit"  class="btn btn-standard w-100">Sign in</button>
+                    </form>
+
+                    </div>
+                  </div>
+
+                  
+<!--                   <div class="dropdown">
                         <button class="dropdown-link nav-link" type="button" id="sign-in-dropdown" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             Sign In
                         </button>
@@ -68,7 +98,7 @@
                                 <button type="submit"  class="btn btn-standard w-100">Sign in</button>
                             </form>
                         </div>
-                      </div>
+                      </div> -->
                     <a class="nav-item active nav-link " routerLink="/register">Sign Up</a>
                 </ng-template>
             </div>

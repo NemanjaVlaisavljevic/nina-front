@@ -26,6 +26,7 @@ import { HomeComponent } from './pages/home/home.component';
 import { ProductCardComponent } from './parts/product-card/product-card.component';
 import { ProductCardDeckComponent } from './parts/product-card-deck/product-card-deck.component';
 import { LoaderInterceptorService } from './_interceptors/loader-interceptor.service';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 
 @NgModule({
   declarations: [
@@ -52,7 +53,8 @@ import { LoaderInterceptorService } from './_interceptors/loader-interceptor.ser
     FormsModule,
     HttpClientModule,
     BrowserAnimationsModule,
-    ToastrModule.forRoot()
+    ToastrModule.forRoot(),
+    NgbModule
   ],
   providers: [CookieService ,
     {provide : HTTP_INTERCEPTORS , useClass : JwtInterceptorService , multi : true},
