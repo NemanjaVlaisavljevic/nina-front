@@ -1,8 +1,139 @@
-<h1 *ngIf = "isEdit === true "align="center" class="display-4 mb-5">Edit Product</h1>
+<div class="container-fluid">
+    <div class="row mt-2">
+        <div class="col-12 text-center">
+            <h1>Edit Product</h1>
+            <hr>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-3">
+          <div class="nav flex-column nav-pills" id="v-pills-tab" role="tablist" aria-orientation="vertical">
+            <a class="nav-link active" id="v-pills-general-tab" data-toggle="pill" href="#v-pills-general" role="tab" aria-controls="v-pills-general" aria-selected="true">General</a>
+            <a class="nav-link" id="v-pills-stock-tab" data-toggle="pill" href="#v-pills-stock" role="tab" aria-controls="v-pills-stock" aria-selected="false">Stock</a>
+            <a class="nav-link" id="v-pills-images-tab" data-toggle="pill" href="#v-pills-images" role="tab" aria-controls="v-pills-images" aria-selected="false">Images</a>
+          </div>
+        </div>
+        <div class="col-9">
+            <form #form="ngForm" (ngSubmit)="onSubmit()">
+                <div class="tab-content" id="v-pills-tabContent">
+                    <div class="tab-pane fade show active" id="v-pills-general" role="tabpanel" aria-labelledby="v-pills-general-tab">
+                        <div class="form-group">
+                            <label for="productName">Name</label>
+                            <input [(ngModel)]="product.productName" type="text" class="form-control" id="productName" name="productName" placeholder="Name" required #productName="ngModel">
+                            <div *ngIf="productName.invalid && (productName.dirty ||productName.touched)">
+                                <small *ngIf="productName.errors.required">Name is required.</small>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="productDescription">Description</label>
+                            <textarea class="form-control text-left" id="productDescription" name="productDescription" placeholder="Description" [(ngModel)]="product.productDescription"></textarea>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="productPrice">Price (RSD)</label>
+                            <input [(ngModel)]="product.productPrice" type="number" class="form-control" id="productPrice" name="productPrice" placeholder="Name" required #productPrice="ngModel" (ngModelChange)="product.productPrice=$event">
+                            <div *ngIf="productPrice.invalid && (productPrice.dirty ||productPrice.touched)">
+                                <small *ngIf="productPrice.errors.required">Price is required.</small>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="productStatus">Status</label>
+                            <select class="custom-select" id="productStatus" name="productStatus" required [(ngModel)]="product.productStatus">
+                                <option [ngValue]=0>Available</option>
+                                <option [ngValue]=1>Unavailable</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <button type="submit" [disabled]="!form.form.valid" class="btn btn-primary btn-block">Submit</button>
+                        </div>
+                    </div>
+                    <div class="tab-pane fade" id="v-pills-stock" role="tabpanel" aria-labelledby="v-pills-stock-tab">
+                        <div class="form-group">
+                            <label for="categoryType">Category</label>
+                            <select class="custom-select" id="categoryType" name="categoryType" (change)='onCategoryChange($event)' [(ngModel)]="product.categoryType" required>
+                                <option [ngValue]='0'>Clothing</option>
+                                <option [ngValue]='1'>Mugs</option>
+                                <option [ngValue]='2'>Jewelry</option>
+                            </select>
+                        </div>
+
+                        <div *ngIf="product.categoryType !== 0; else categoryIsClothing" class="form-group">
+                            <label for="productStock">Stock</label>
+                            <input class="form-control" type="number" id="productStock" name="productStock" min="0" #productStock="ngModel" [(ngModel)]="product.productStock" required>
+                            <div *ngIf="productStock.invalid && (productStock.dirty ||productStock.touched)">
+                                <small *ngIf="productStock.errors.required">Stock is required.</small>
+                            </div>
+                        </div>
+                        <ng-template #categoryIsClothing>
+                            <div *ngFor="let size of getSizes()" class="form-group">
+                                <label for="productPrice">Size {{size.productSize}}</label>
+                                <input [(ngModel)]="size.currentSizeStock" type="number" class="form-control" id="productStock{{size.productSize}}" name="productStock{{size.productSize}}" placeholder="Stock">
+                                <!-- <input [(ngModel)]="product.productPrice" type="number" class="form-control" id="productPrice" name="productPrice" placeholder="Name" required #productPrice="ngModel" (ngModelChange)="product.productPrice=$event">
+                                <div *ngIf="productPrice.invalid && (productPrice.dirty ||productPrice.touched)">
+                                    <small *ngIf="productPrice.errors.required">Price is required.</small>
+                                </div> -->
+                            </div>
+                        </ng-template>
+                    </div>
+                    <div class="tab-pane fade" id="v-pills-images" role="tabpanel" aria-labelledby="v-pills-images-tab">
+                        <div class="images-container">
+                            <div *ngFor="let image of getProductImages()" class="image-container rounded">
+                                <img class="image rounded" src="{{image.productIcon}}">
+                                <div class="overlay absolute-center rounded">
+                                    <i class="fas fa-edit fa-2x"></i>
+                                </div>
+                            </div>
+                            <div class="add-image absolute-center rounded">
+                                <i class="fas fa-plus fa-2x"></i>
+                            </div>
+                        </div>
+                        
+                        <!-- <div class="add-image">
+                            <i class="fas fa-plus fa-2x"></i>
+                        </div> -->
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+
+<!-- Button trigger modal -->
+<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#staticBackdrop">
+    Launch static backdrop modal
+  </button>
+  
+  <!-- Modal -->
+  <div class="modal fade" id="staticBackdrop" data-backdrop="static" data-keyboard="false" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="staticBackdropLabel">Modal title</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
+        </div>
+        <div class="modal-body">
+          ...
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-primary">Understood</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+<!-- <h1 *ngIf = "isEdit === true "align="center" class="display-4 mb-5">Edit Product</h1>
 <h1 *ngIf = "isEdit === false "align="center" class="display-4 mb-5">Add Product</h1>
 <div style="width:40%; margin: 25px auto">
     <form #form="ngForm" (ngSubmit)="onSubmit()">
-        <!--Id-->
+
         <div *ngIf = "isEdit == true " class="form-group">
             <label for="productId">Code</label>
             <input [readOnly]="isEdit" [disabled]="isEdit" [(ngModel)]="product.productId" type="text"
@@ -14,14 +145,14 @@
                 </div>
             </div>
         </div>
-        <!--Photo-->
+
         <div class="form-group">
             <label>Photo Link</label>
             <input [(ngModel)]="product.productIcons[0].productIcon" type="text" class="form-control form-control-lg" id="productIcon"
                    name="productIcon" placeholder="Photo">
         </div>
 
-        <!--Name-->
+
         <div class="form-group">
             <label>Name</label>
             <input [(ngModel)]="product.productName" type="text" class="form-control form-control-lg" id="productName"
@@ -34,7 +165,7 @@
             </div>
         </div>
 
-        <!--Category-->
+
         <div class="form-group">
             <label for="categoryType">Category</label>
             <select class="custom-select custom-select-lg " id="categoryType" name="categoryType"
@@ -46,14 +177,14 @@
             </select>
         </div>
 
-        <!--Description-->
+
         <div class="form-group">
             <label>Description</label>
             <textarea class="form-control form-control-lg text-left"
                       id="productDescription" name="productDescription"
                       placeholder="Description" [(ngModel)]="product.productDescription"></textarea>
         </div>
-        <!--Price-->
+
         <div class="form-group">
             <label for="productPrice">Price</label>
             <input class="form-control form-control-lg"
@@ -69,7 +200,7 @@
                 </div>
             </div>
         </div>
-        <!--Stock-->
+
         <div class="form-group">
             <label for="productStock">Stock</label>
             <input class="form-control form-control-lg"
@@ -85,7 +216,7 @@
                 </div>
             </div>
         </div>
-        <!--Status-->
+
         <div class="form-group">
             <label for="productStatus">Status</label>
             <select class="custom-select custom-select-lg " id="productStatus" name="productStatus" required
@@ -101,3 +232,4 @@
 
 
 </div>
+ -->

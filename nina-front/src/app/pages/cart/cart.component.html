@@ -35,9 +35,11 @@
                               {{productInOrder.productSize}}
                             </td>
                             <td class="align-middle text-center">
-                                <div class="btn-quantity btn-standard" (click)="minusOne(productInOrder)">-</div>
+                                <div [ngClass]="{'btn-quantity ': validateDecreaseButton(productInOrder), 'btn-quantity-disabled ': !validateDecreaseButton(productInOrder)}" 
+                                    class="btn-standard" (click)="decreaseCount(productInOrder)">-</div>
                                 <span class="mx-2">{{productInOrder.count}}</span>
-                                <div class="btn-quantity btn-standard" (click)="addOne(productInOrder)">+</div>
+                                <div [ngClass]="{'btn-quantity ': validateIncreaseButton(productInOrder), 'btn-quantity-disabled ': !validateIncreaseButton(productInOrder)}" 
+                                    class="btn-standard" (click)="increaseCount(productInOrder)">+</div>
                             </td>
                             <td class="align-middle text-center">
                                 {{productInOrder.productPrice}} RSD

@@ -32,7 +32,10 @@ export class CartComponent implements OnInit  , OnDestroy , AfterContentChecked{
         });
      }
 
-  static validateCount(productInOrder){
+  static validateCount(productInOrder : ProductInOrder){
+    
+
+
     const max = productInOrder.productStock;
     if(productInOrder.count > max){
       productInOrder.count = max;
@@ -69,7 +72,7 @@ export class CartComponent implements OnInit  , OnDestroy , AfterContentChecked{
       (prev, cur) => prev + cur.count * cur.productPrice, 0);
   }
 
-  addOne(productInOrder){
+  increaseCount(productInOrder){
       productInOrder.count++;
       CartComponent.validateCount(productInOrder);
       if(this.currentUser){
@@ -77,12 +80,20 @@ export class CartComponent implements OnInit  , OnDestroy , AfterContentChecked{
       }
   }
 
-  minusOne(productInOrder){
+  decreaseCount(productInOrder){
     productInOrder.count--;
     CartComponent.validateCount(productInOrder);
     if (this.currentUser) {
       this.updateTerms.next(productInOrder);
     }
+  }
+
+  validateIncreaseButton(productInOrder : ProductInOrder) {
+    return productInOrder.count !== productInOrder.productStock;
+  }
+
+  validateDecreaseButton(productInOrder : ProductInOrder) {
+    return productInOrder.count > 1;
   }
 
   onChange(productInOrder){

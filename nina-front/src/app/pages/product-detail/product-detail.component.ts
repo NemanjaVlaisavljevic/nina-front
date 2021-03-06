@@ -94,9 +94,8 @@ export class ProductDetailComponent implements OnInit {
   }
 
   addToCart() : void {
-    this.productSize = this.productSizeInNumber;
     this.cartService
-        .addItem(new ProductInOrder(this.productInfo , this.count , this.productSize))
+        .addItem(new ProductInOrder(this.productInfo , this.count , this.selectedProductSizeStock.productSize))
         .subscribe(res => {
           if (!res) {
             console.log('Add Cart failed' + res);
