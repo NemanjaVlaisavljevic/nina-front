@@ -51,9 +51,7 @@ export class ProductEditComponent implements OnInit, AfterContentChecked  {
 	onAddSubmit(event: any) {
 		var value: string = event.target.imageUrlAdd.value;
 		if(value !== "" && (value.startsWith("http") || value.startsWith("https"))) {
-			var image = new ProductIcon();
-			image.productIcon = value;
-			this.product.productIcons.push(image);
+			this.product.productIcons.push(new ProductIcon(value , this.product.productIcons[this.product.productIcons.length - 1].iconOrder + 1));
 		}
 	}
 
@@ -63,6 +61,7 @@ export class ProductEditComponent implements OnInit, AfterContentChecked  {
       this.isEdit = true;
       this.productService.getProductDetail(this.productId).subscribe(data => {
         this.product = data;
+   //     this.product.productIcons = this.product.productIcons.sort((a , b) => a.id - b.id);
       });
     }
   }
@@ -93,7 +92,6 @@ export class ProductEditComponent implements OnInit, AfterContentChecked  {
       if(this.product.categoryType === 0) {
         this.product.productStock = this.product.productSizes.reduce((sum, current) => sum + current.currentSizeStock, 0);
       }
-
       this.productService.updateProduct(this.product).subscribe(data => {
           if(!data){
             this.toastrService.error('Error while updating product.');
