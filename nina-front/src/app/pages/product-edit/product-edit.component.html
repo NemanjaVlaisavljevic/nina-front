@@ -6,9 +6,10 @@
         </div>
     </div>
 
+    <form #form="ngForm" (ngSubmit)="onSubmit()">
     <div class="row">
         <div class="col-3">
-            <form #form="ngForm" (ngSubmit)="onSubmit()">
+            
                 <ul ngbNav #nav="ngbNav" animation="true" [(activeId)]="active" class="nav-pills nav-fill flex-column" orientation="vertical">
                     <li ngbNavItem="general">
                         <a ngbNavLink draggable="false">General</a>
@@ -43,7 +44,7 @@
                                 </div>
         
                                 <div class="form-group">
-                                    <button type="submit" [disabled]="!form.form.valid" class="btn btn-primary btn-block">Submit</button>
+                                    <button type="submit"  class="btn btn-primary btn-block">Submit</button>
                                 </div>
                         </ng-template>
                     </li>
@@ -84,31 +85,77 @@
                         <a ngbNavLink draggable="false">Images</a>
                         <ng-template ngbNavContent>
                                 <div class="images-container">
-                                    <div *ngFor="let image of getProductImages()" class="image-container rounded">
+                                    <div *ngFor="let image of getProductImages()" class="image-container rounded" (click)="selectedImage = image; showModal(editImage)">
                                         <img class="image rounded" src="{{image.productIcon}}">
                                         <div class="overlay absolute-center rounded">
                                             <i class="fas fa-edit fa-2x"></i>
                                         </div>
                                     </div>
-                                    <div class="add-image absolute-center rounded">
+                                    <div class="add-image absolute-center rounded" (click)="showModal(addImage)">
                                         <i class="fas fa-plus fa-2x"></i>
                                     </div>
                                 </div>
                         </ng-template>
                       </li>
                 </ul>
-            </form>
+
         </div>
         <div class="col-9">
             <div [ngbNavOutlet]="nav"></div>
         </div>
     </div>
+</form>
 
 
 
 
     
 </div>
+
+<ng-template #editImage let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Edit Image</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <form (ngSubmit)="onEditSubmit($event)">
+    <div class="modal-body">
+      
+        <div class="form-group">
+            <label for="imageUrlEdit">Image URL</label>
+            <input id="imageUrlEdit" class="form-control" value="{{selectedImage?.productIcon}}" name="imageUrlEdit">
+        </div>
+      
+    </div>
+    <div class="modal-footer">
+      <button type="submit" class="btn btn-outline-dark" (click)="modal.close()">Save</button>
+    </div>
+</form>
+  </ng-template>
+
+  <ng-template #addImage let-modal>
+    <div class="modal-header">
+      <h4 class="modal-title" id="modal-basic-title">Add Image</h4>
+      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss()">
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+    <form (ngSubmit)="onAddSubmit($event)">
+    <div class="modal-body">
+        <div class="form-group">
+            <label for="imageUrlAdd">Image URL</label>
+            <input id="imageUrlAdd" class="form-control" name="imageUrlAdd">
+        </div>
+    </div>
+    <div class="modal-footer">
+      <button type="submit" class="btn btn-outline-dark" (click)="modal.close()">Save</button>
+    </div>
+</form>
+  </ng-template>
+
+
+
 <!-- 
 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#staticBackdrop">
     Launch static backdrop modal

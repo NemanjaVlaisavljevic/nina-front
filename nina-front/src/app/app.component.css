@@ -8,3 +8,24 @@
 .right{
   float: right;
 }
+
+.page-wrapper {
+  display: grid;
+  grid-template-rows: auto 1fr;
+}
+
+.page-header {
+  grid-row: 1/2;
+}
+
+.page-content {
+  grid-row: 2/3;
+}
+
+.route-container {
+  position: relative;
+}
+
+.route-container > * {
+  display:block;
+}

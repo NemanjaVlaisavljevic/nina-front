@@ -33,6 +33,8 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   returnUrl = '/';
 
+  public isMenuCollapsed = true;
+
   constructor(private userService : UserService, private router : Router, private activatedRoute : ActivatedRoute, public loaderService : LoaderService,
               private toastrService : ToastrService) { }
 

@@ -1,1 +1,7 @@
-<router-outlet></router-outlet>
+<div class="page-wrapper h-100" style="position: relative;">
+    <app-header class="page-header"></app-header>
+    <main [@fadeAnimation]="prepareRoute(o)" class="route-container">
+        <router-outlet #o="outlet" class="page-content d-none"></router-outlet>
+    </main>
+    
+</div>

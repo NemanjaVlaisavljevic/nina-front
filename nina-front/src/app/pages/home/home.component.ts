@@ -3,11 +3,13 @@ import { ActivatedRoute } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { ProductInfo } from 'src/app/models/ProductInfo';
 import { ProductService } from 'src/app/services/product.service';
+import { fadeAnimation } from '../../../animations';
 
 @Component({
   selector: 'app-home',
   templateUrl: './home.component.html',
-  styleUrls: ['./home.component.css']
+  styleUrls: ['./home.component.css'],
+  animations: [fadeAnimation] // register the animation
 })
 export class HomeComponent implements OnInit, OnDestroy {
 

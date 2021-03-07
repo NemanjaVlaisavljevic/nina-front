@@ -1,7 +1,9 @@
 import { AfterContentChecked, Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
+import { NgbModal, NgbModalConfig, NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
 import { ToastrService } from 'ngx-toastr';
 import { ProductSize } from 'src/app/enums/ProductSize';
+import { ProductIcon } from 'src/app/models/ProductIcon';
 import { ProductInfo } from 'src/app/models/ProductInfo';
 import { ProductSizeStock } from 'src/app/models/ProductSizeStock';
 import { ProductService } from 'src/app/services/product.service';
@@ -18,13 +20,42 @@ export class ProductEditComponent implements OnInit, AfterContentChecked  {
   isEdit = false;
   active = 'general';
 
-  constructor(private toastrService : ToastrService ,
+  selectedImage: ProductIcon;
+
+  constructor(private toastrService : ToastrService , private modalService: NgbModal, config: NgbModalConfig,
     private productService : ProductService,
     private router : Router,
     private activeRoute : ActivatedRoute) {
-
+      config.backdrop = 'static';
+      config.keyboard = false;
     }
 
+    showModal(content) {
+      this.modalService.open(content, {ariaLabelledBy: 'modal-basic-title'});
+    }
+
+	onEditSubmit(event: any) {
+		if(this.selectedImage !== undefined) {
+      		if(event.target.imageUrlEdit.value === "") {
+				const index = this.product.productIcons.findIndex(x => x.productIcon === this.selectedImage.productIcon);
+				if(index > -1) {
+				this.product.productIcons.splice(index, 1);
+				}
+      		}
+			else {
+				this.selectedImage.productIcon = event.target.imageUrlEdit.value;
+			}
+    	}
+  	}
+
+	onAddSubmit(event: any) {
+		var value: string = event.target.imageUrlAdd.value;
+		if(value !== "" && (value.startsWith("http") || value.startsWith("https"))) {
+			var image = new ProductIcon();
+			image.productIcon = value;
+			this.product.productIcons.push(image);
+		}
+	}
 
   ngOnInit(): void {
     this.productId = +this.activeRoute.snapshot.paramMap.get('id');

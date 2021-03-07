@@ -1,14 +1,42 @@
-/* @import "~bootstrap/dist/css/bootstrap.min.css"; */
+/* -------------------------------------------------------------------------------------- */
+/* HTML/BODY                                                                              */
+/* -------------------------------------------------------------------------------------- */
 
-.ng-valid[required], .ng-valid.required  {
-  border-color: #28a745;
-  /* border-left: 5px solid #42A948; */
+html {
+  height: 100%;
 }
 
-.ng-touched.ng-invalid:not(form)  {
-  border-color: #dc3545;
-  /* border-left: 5px solid #a94442; */
+body {
+  background-color: #EDD8CF;
+  font-family: 'quicksand';
+  font-style: normal;
+  font-weight: 500;
 }
+
+.container, .container-fluid {
+  color: #AB3B61;
+}
+
+/* -------------------------------------------------------------------------------------- */
+/* LAYOUT                                                                                 */
+/* -------------------------------------------------------------------------------------- */
+
+.page-content-wrapper {
+  display: grid;
+  grid-template-rows: 1fr auto;
+}
+
+.wrapped-content {
+  grid-row: 1/2;
+}
+
+.wrapped-footer {
+  grid-row: 2/3;
+}
+
+/* -------------------------------------------------------------------------------------- */
+/* LOADER                                                                                 */
+/* -------------------------------------------------------------------------------------- */
 
 .loader-container {
   position: fixed;
@@ -28,48 +56,21 @@
   height: 5rem;
 }
 
-html {
-  height: 100%;
+/* -------------------------------------------------------------------------------------- */
+/* VALIDATION                                                                             */
+/* -------------------------------------------------------------------------------------- */
+
+.ng-valid[required], .ng-valid.required  {
+  border-color: #28a745;
 }
 
-body {
-  background-color: #EDD8CF;
-  font-family: 'quicksand';
-  font-style: normal;
-  font-weight: 500;
-
-  display: grid;
-  grid-template-rows: auto 1fr auto;
-  min-height: 100%;
-  width: 100%; 
-  height: 100%;
-
-  /* position: relative;
-  margin: 0;
-  display: table; 
-  width: 100%; 
-  height: 100%; */
+.ng-touched.ng-invalid:not(form)  {
+  border-color: #dc3545;
 }
 
-.dropdown-toggle::after {
-  display:none;
-}
-
-.grid-header {
-  grid-row: 1/2;
-}
-
-.grid-content {
-  grid-row: 2/3;
-}
-
-.grid-footer {
-  grid-row: 3/4;
-}
-
-.container, .container-fluid {
-  color: #AB3B61;
-}
+/* -------------------------------------------------------------------------------------- */
+/* BUTTONS                                                                                */
+/* -------------------------------------------------------------------------------------- */
 
 .btn-standard {
   background-color: #EDC8B8;
@@ -93,47 +94,6 @@ body {
 .btn-standard:disabled , .btn-standard:disabled:hover {
   background-color: #BBB2B5;
   color: #AB3B61;
-}
-
-/* .btn-standard:disabled:hover{
-  background-color: #BBB2B5;
-  color: #28a745;
-} */
-
-.dropdown-link {
-  background-color: transparent;
-  border: 0px;
-  outline: 0;
-  box-shadow: 0 0 0 0;
-  color: #AB3B61;
-}
-
-.dropdown-link:hover, .dropdown-link:focus {
-  color: #123D6A;
-  outline: 0;
-  box-shadow: 0 0 0 0;
-}
-
-.form-control {
-  background-color: #EDE2DC;
-  border: 1px solid #BBB2B5;
-  color: #AB3B61;
-}
-
-.form-control:focus {
-  /* border-color: #FF0000; */
-  background-color: #f2eae6;
-  border: 1px solid #AB3B61;
-  box-shadow:  0 0 8px rgba(171, 59, 97, 0.6);
-}
-
-.form-control::placeholder {
-  color: #AB3B61;
-  opacity: 1;
-}
-
-.form-check-input {
-  background-color: #EDE2DC;
 }
 
 .btn {
@@ -169,4 +129,64 @@ body {
   line-height: 22px;
   text-align: center;
   user-select:none;
+}
+
+/* -------------------------------------------------------------------------------------- */
+/* NAV PILLS OVERRIDE                                                                     */
+/* -------------------------------------------------------------------------------------- */
+
+.nav-pills a {
+  color: #AB3B61;
+}
+
+.nav-pills .nav-link.active {
+  background-color: #EDC8B8;
+  color: #AB3B61;
+}
+
+/* -------------------------------------------------------------------------------------- */
+/* NAV CONTROLS OVERRIDE                                                                  */
+/* -------------------------------------------------------------------------------------- */
+
+.dropdown-toggle::after {
+  display:none;
+}
+
+.dropdown-link {
+  background-color: transparent;
+  border: 0px;
+  outline: 0;
+  box-shadow: 0 0 0 0;
+  color: #AB3B61;
+}
+
+.dropdown-link:hover, .dropdown-link:focus {
+  color: #123D6A;
+  outline: 0;
+  box-shadow: 0 0 0 0;
+}
+
+/* -------------------------------------------------------------------------------------- */
+/* FORM CONTROLS OVERRIDE                                                                 */
+/* -------------------------------------------------------------------------------------- */
+
+.form-control {
+  background-color: #EDE2DC;
+  border: 1px solid #BBB2B5;
+  color: #AB3B61;
+}
+
+.form-control:focus {
+  background-color: #f2eae6;
+  border: 1px solid #AB3B61;
+  box-shadow:  0 0 8px rgba(171, 59, 97, 0.6);
+}
+
+.form-control::placeholder {
+  color: #AB3B61;
+  opacity: 1;
+}
+
+.form-check-input {
+  background-color: #EDE2DC;
 }

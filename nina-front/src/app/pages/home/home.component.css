@@ -1,25 +1,17 @@
-.nav-pills a {
-    color: #AB3B61;
-}
-
-.nav-pills .active {
-    background-color: #EDC8B8;
-}
-
 @media only screen and (min-width: 1200px){
-    .card-row-padding {
-        padding-left: 0px;
-    }
-    .container-padding {
-        padding: 0px;
+    .container {
+        max-width: 100%;
     }
 }
 
-@media only screen and (max-width: 1200px){
-    .card-row-padding {
-        padding-left: 15px;
+@media only screen and (min-width: 1300px) {
+    .container {
+        max-width: 90%;
     }
-    .container-padding {
-        padding: 15px;
+}
+
+@media only screen and (min-width: 1500px) {
+    .container {
+        max-width: 1320px;
     }
 }

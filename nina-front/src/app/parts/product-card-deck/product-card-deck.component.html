@@ -1,9 +1,7 @@
 <div class="container-fluid product-card-container">
-    <div class="row row-cols-sm-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 justify-content-center justify-content-md-between justify-content-xl-start" >
-      <div *ngFor="let productInfo of products">
-        <div class="col my-2">
-          <app-product-card [product]='productInfo'></app-product-card>
-        </div>
-      </div>
+  <div class="row row-cols-sm-1 row-cols-md-2 row-cols-lg-3 row-cols-xl-4 justify-content-center justify-content-md-between justify-content-xl-start" >
+    <div *ngFor="let productInfo of products" class="my-2">
+      <app-product-card [product]='productInfo'></app-product-card>
     </div>
   </div>
+</div>

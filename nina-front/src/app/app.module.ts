@@ -61,6 +61,6 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     {provide : HTTP_INTERCEPTORS , useClass : ErrorInterceptorService , multi : true},
     {provide : HTTP_INTERCEPTORS , useClass : LoaderInterceptorService , multi : true}
   ],
-  bootstrap: [AppComponent, HeaderComponent, FooterComponent]
+  bootstrap: [AppComponent, HeaderComponent]
 })
 export class AppModule { }

@@ -15,14 +15,21 @@ import { AuthGuard } from './_guard/auth.guard';
 
 
 const routes: Routes = [
-  {path : '' , component: HomeComponent},
-  // {path: 'product', component: CardComponent},
-  {path: 'product/:id', component: ProductDetailComponent},
-/*   {path: 'category/:id', component: CardComponent},
-  {path: 'category', component: CardComponent},
+  { path: '', redirectTo: 'shop', pathMatch: 'full' },
+  { path: 'shop' , component: HomeComponent, data: {animationState: 'shop'} },
+  { path: 'product/:id', component: ProductDetailComponent, data: {animationState: 'product'} },
+  { path: 'logout' , component: LoginComponent },
+  { path: 'register' , component: SignupComponent },
+  { path: 'profile' , component: UserEditComponent },
+  { path: 'order', component: OrderComponent, canActivate: [AuthGuard] },
+  { path: 'order/:id' , component: OrderDetailComponent, canActivate: [AuthGuard] },
+  { path: 'cart', component: CartComponent, data: {animationState: 'cart'} },
+  { path: 'admin', redirectTo: 'admin/product', pathMatch: 'full' },
+  { path: 'admin/product' , component : ProductListComponent, canActivate: [AuthGuard], data: {roles: [UserRole.ADMIN]} },
+  { path: 'admin/product/new' , component: ProductEditComponent, canActivate: [AuthGuard], data: {roles: [UserRole.ADMIN]} },
+  { path: 'admin/product/:id/edit' , component: ProductEditComponent, canActivate: [AuthGuard], data: {roles: [UserRole.ADMIN]} }
 
-  {path : 'login' , component : LoginComponent},
-  */
+  /* {path: 'product/:id', component: ProductDetailComponent},
   {path : 'logout' , component : LoginComponent},
   {path : 'register' , component : SignupComponent},
   {path : 'profile' , component : UserEditComponent , canActivate : [AuthGuard]},
@@ -35,7 +42,7 @@ const routes: Routes = [
   {path : 'admin/product/new' , component : ProductEditComponent ,
     canActivate : [AuthGuard] , data : {roles : [UserRole.ADMIN]}},
   {path : 'admin/product/:id/edit' , component : ProductEditComponent ,
-    canActivate : [AuthGuard] , data : {roles : [UserRole.ADMIN]}}
+    canActivate : [AuthGuard] , data : {roles : [UserRole.ADMIN]}} */
 ];
 
 @NgModule({
