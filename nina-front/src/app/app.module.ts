@@ -27,6 +27,7 @@ import { ProductCardComponent } from './parts/product-card/product-card.componen
 import { ProductCardDeckComponent } from './parts/product-card-deck/product-card-deck.component';
 import { LoaderInterceptorService } from './_interceptors/loader-interceptor.service';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { DragDropModule } from '@angular/cdk/drag-drop'
 
 @NgModule({
   declarations: [
@@ -54,7 +55,8 @@ import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
     HttpClientModule,
     BrowserAnimationsModule,
     ToastrModule.forRoot(),
-    NgbModule
+    NgbModule,
+    DragDropModule
   ],
   providers: [CookieService ,
     {provide : HTTP_INTERCEPTORS , useClass : JwtInterceptorService , multi : true},

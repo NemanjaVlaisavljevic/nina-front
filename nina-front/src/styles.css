@@ -131,6 +131,10 @@ body {
   user-select:none;
 }
 
+.btn-w-100 {
+  width: 100px;
+}
+
 /* -------------------------------------------------------------------------------------- */
 /* NAV PILLS OVERRIDE                                                                     */
 /* -------------------------------------------------------------------------------------- */
@@ -189,4 +193,38 @@ body {
 
 .form-check-input {
   background-color: #EDE2DC;
+}
+
+.custom-select {
+  background-color: #EDE2DC;
+  color: #AB3B61;
+}
+
+.custom-select:focus {
+  background-color: #f2eae6;
+  border: 1px solid #AB3B61;
+  box-shadow:  0 0 8px rgba(171, 59, 97, 0.6);
+}
+
+option {
+  background-color: #EDE2DC;
+}
+
+/* -------------------------------------------------------------------------------------- */
+/* MODAL CONTROLS OVERRIDE                                                                */
+/* -------------------------------------------------------------------------------------- */
+
+.modal-body, .modal-header, .modal-footer {
+  background-color: #E9D5CC;
+  color: #AB3B61;
+}
+
+.modal-header, .modal-footer {
+  border: 0px;
+  
+}
+
+.modal-body {
+  padding-top: 0px;
+  padding-bottom: 0px;
 }

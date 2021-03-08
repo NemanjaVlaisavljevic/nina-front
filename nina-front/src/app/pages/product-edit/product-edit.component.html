@@ -5,154 +5,165 @@
             <hr>
         </div>
     </div>
-
     <form #form="ngForm" (ngSubmit)="onSubmit()">
-    <div class="row">
-        <div class="col-3">
-            
+        <div class="row">
+            <div class="col-12 col-lg-3">
                 <ul ngbNav #nav="ngbNav" animation="true" [(activeId)]="active" class="nav-pills nav-fill flex-column" orientation="vertical">
                     <li ngbNavItem="general">
                         <a ngbNavLink draggable="false">General</a>
                         <ng-template ngbNavContent>
-                                <div class="form-group">
-                                    <label for="productName">Name</label>
-                                    <input [(ngModel)]="product.productName" type="text" class="form-control" id="productName" name="productName" placeholder="Name" required #productName="ngModel">
-                                    <div *ngIf="productName.invalid && (productName.dirty ||productName.touched)">
-                                        <small *ngIf="productName.errors.required">Name is required.</small>
-                                    </div>
+                            <div class="form-group">
+                                <label for="productName">Name</label>
+                                <input [(ngModel)]="product.productName" type="text" class="form-control" id="productName" name="productName" placeholder="Name" required #productName="ngModel">
+                                <div *ngIf="productName.invalid && (productName.dirty ||productName.touched)">
+                                    <small *ngIf="productName.errors.required">Name is required.</small>
                                 </div>
-        
-                                <div class="form-group">
-                                    <label for="productDescription">Description</label>
-                                    <textarea class="form-control text-left" id="productDescription" name="productDescription" placeholder="Description" [(ngModel)]="product.productDescription"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="productDescription">Description</label>
+                                <textarea class="form-control text-left" id="productDescription" name="productDescription" placeholder="Description" [(ngModel)]="product.productDescription"></textarea>
+                            </div>
+                            <div class="form-group">
+                                <label for="productPrice">Price (RSD)</label>
+                                <input [(ngModel)]="product.productPrice" type="number" class="form-control" id="productPrice" name="productPrice" placeholder="Name" required #productPrice="ngModel" (ngModelChange)="product.productPrice=$event">
+                                <div *ngIf="productPrice.invalid && (productPrice.dirty ||productPrice.touched)">
+                                    <small *ngIf="productPrice.errors.required">Price is required.</small>
                                 </div>
-        
-                                <div class="form-group">
-                                    <label for="productPrice">Price (RSD)</label>
-                                    <input [(ngModel)]="product.productPrice" type="number" class="form-control" id="productPrice" name="productPrice" placeholder="Name" required #productPrice="ngModel" (ngModelChange)="product.productPrice=$event">
-                                    <div *ngIf="productPrice.invalid && (productPrice.dirty ||productPrice.touched)">
-                                        <small *ngIf="productPrice.errors.required">Price is required.</small>
-                                    </div>
-                                </div>
-        
-                                <div class="form-group">
-                                    <label for="productStatus">Status</label>
-                                    <select class="custom-select" id="productStatus" name="productStatus" required [(ngModel)]="product.productStatus">
-                                        <option [ngValue]=0>Available</option>
-                                        <option [ngValue]=1>Unavailable</option>
-                                    </select>
-                                </div>
-        
-                                <div class="form-group">
-                                    <button type="submit"  class="btn btn-primary btn-block">Submit</button>
-                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="productStatus">Status</label>
+                                <select class="custom-select" id="productStatus" name="productStatus" required [(ngModel)]="product.productStatus">
+                                    <option [ngValue]=0>Available</option>
+                                    <option [ngValue]=1>Unavailable</option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-standard btn-block">Submit</button>
+                            </div>
                         </ng-template>
                     </li>
                     <li ngbNavItem="stock">
                         <a ngbNavLink draggable="false">Stock</a>
                         <ng-template ngbNavContent>
-                            
-                                <div class="form-group">
-                                    <label for="categoryType">Category</label>
-                                    <select class="custom-select" id="categoryType" name="categoryType" (change)='onCategoryChange($event)' [(ngModel)]="product.categoryType" required>
-                                        <option [ngValue]='0'>Clothing</option>
-                                        <option [ngValue]='1'>Mugs</option>
-                                        <option [ngValue]='2'>Jewelry</option>
-                                    </select>
+                            <div class="form-group">
+                                <label for="categoryType">Category</label>
+                                <select class="custom-select" id="categoryType" name="categoryType" (change)='onCategoryChange($event)' [(ngModel)]="product.categoryType" required>
+                                    <option [ngValue]='0'>Clothing</option>
+                                    <option [ngValue]='1'>Mugs</option>
+                                    <option [ngValue]='2'>Jewelry</option>
+                                </select>
+                            </div>
+                            <div *ngIf="product.categoryType !== 0; else categoryIsClothing" class="form-group">
+                                <label for="productStock">Stock</label>
+                                <input class="form-control" type="number" id="productStock" name="productStock" min="0" #productStock="ngModel" [(ngModel)]="product.productStock" required>
+                                <div *ngIf="productStock.invalid && (productStock.dirty ||productStock.touched)">
+                                    <small *ngIf="productStock.errors.required">Stock is required.</small>
                                 </div>
-        
-                                <div *ngIf="product.categoryType !== 0; else categoryIsClothing" class="form-group">
-                                    <label for="productStock">Stock</label>
-                                    <input class="form-control" type="number" id="productStock" name="productStock" min="0" #productStock="ngModel" [(ngModel)]="product.productStock" required>
-                                    <div *ngIf="productStock.invalid && (productStock.dirty ||productStock.touched)">
-                                        <small *ngIf="productStock.errors.required">Stock is required.</small>
-                                    </div>
+                            </div>
+                            <ng-template #categoryIsClothing>
+                                <div *ngFor="let size of getSizes()" class="form-group">
+                                    <label for="productPrice">Size {{size.productSize}}</label>
+                                    <input [(ngModel)]="size.currentSizeStock" type="number" class="form-control" id="productStock{{size.productSize}}" name="productStock{{size.productSize}}" placeholder="Stock">
+                                    <!-- <input [(ngModel)]="product.productPrice" type="number" class="form-control" id="productPrice" name="productPrice" placeholder="Name" required #productPrice="ngModel" (ngModelChange)="product.productPrice=$event">
+                                    <div *ngIf="productPrice.invalid && (productPrice.dirty ||productPrice.touched)">
+                                        <small *ngIf="productPrice.errors.required">Price is required.</small>
+                                    </div> -->
                                 </div>
-                                <ng-template #categoryIsClothing>
-                                    <div *ngFor="let size of getSizes()" class="form-group">
-                                        <label for="productPrice">Size {{size.productSize}}</label>
-                                        <input [(ngModel)]="size.currentSizeStock" type="number" class="form-control" id="productStock{{size.productSize}}" name="productStock{{size.productSize}}" placeholder="Stock">
-                                        <!-- <input [(ngModel)]="product.productPrice" type="number" class="form-control" id="productPrice" name="productPrice" placeholder="Name" required #productPrice="ngModel" (ngModelChange)="product.productPrice=$event">
-                                        <div *ngIf="productPrice.invalid && (productPrice.dirty ||productPrice.touched)">
-                                            <small *ngIf="productPrice.errors.required">Price is required.</small>
-                                        </div> -->
-                                    </div>
-                                </ng-template>
-
+                            </ng-template>
                         </ng-template>
-                      </li>
-                      <li ngbNavItem="images">
+                    </li>
+                    <li ngbNavItem="images">
                         <a ngbNavLink draggable="false">Images</a>
                         <ng-template ngbNavContent>
-                                <div class="images-container">
-                                    <div *ngFor="let image of getProductImages()" class="image-container rounded" (click)="selectedImage = image; showModal(editImage)">
-                                        <img class="image rounded" src="{{image.productIcon}}">
-                                        <div class="overlay absolute-center rounded">
-                                            <i class="fas fa-edit fa-2x"></i>
+                            <div class="row">
+                                <div class="col-12">
+                                    <button type="button" class="btn btn-standard btn-block" (click)="showModal(addImage)">Add</button>
+                                </div>
+                            </div>
+                            <div class="row mt-2">
+                                <div class="col-12">
+                                    <div cdkDropList class="images-list" (cdkDropListDropped)="drop($event)">
+                                        <div class="image-box" *ngFor="let image of getProductImages()" cdkDrag>
+                                        <div class="image-placeholder" *cdkDragPlaceholder></div>
+                                        <div class="image-box-image">
+                                            <img class="image rounded" src="{{image.productIcon}}">
+                                        </div>
+                                        <div class="image-box-actions">
+                                            <div class="mr-2 my-2" style="width: 100px;">
+                                                <button type="button" class="btn btn-standard btn-block" (click)="selectedImage = image; showModal(editImage)">Edit</button>
+                                            </div>
+                                            <div class="mr-2 my-2" style="width: 100px;">
+                                                <button type="button" class="btn btn-standard btn-block" (click)="selectedImage = image; showModal(removeImage)">Remove</button>
+                                            </div>
+                                        </div>
                                         </div>
                                     </div>
-                                    <div class="add-image absolute-center rounded" (click)="showModal(addImage)">
-                                        <i class="fas fa-plus fa-2x"></i>
-                                    </div>
                                 </div>
+                            </div>
                         </ng-template>
-                      </li>
+                    </li>
                 </ul>
-
+            </div>
+            <div class="col-12 col-lg-9 mt-2 mt-lg-0">
+                <div [ngbNavOutlet]="nav"></div>
+            </div>
         </div>
-        <div class="col-9">
-            <div [ngbNavOutlet]="nav"></div>
-        </div>
-    </div>
-</form>
-
-
-
-
-    
+    </form>
 </div>
 
 <ng-template #editImage let-modal>
     <div class="modal-header">
-      <h4 class="modal-title" id="modal-basic-title">Edit Image</h4>
-      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss()">
-        <span aria-hidden="true">&times;</span>
-      </button>
+        <h4 class="modal-title" id="modal-basic-title">Edit Image</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss()">
+            <span aria-hidden="true">&times;</span>
+        </button>
     </div>
     <form (ngSubmit)="onEditSubmit($event)">
-    <div class="modal-body">
-      
-        <div class="form-group">
-            <label for="imageUrlEdit">Image URL</label>
-            <input id="imageUrlEdit" class="form-control" value="{{selectedImage?.productIcon}}" name="imageUrlEdit">
+        <div class="modal-body">
+            <div class="form-group mb-0">
+                <label for="imageUrlEdit">Image URL</label>
+                <input id="imageUrlEdit" class="form-control" autocomplete="off" value="{{selectedImage?.productIcon}}" name="imageUrlEdit">
+            </div>
         </div>
-      
-    </div>
-    <div class="modal-footer">
-      <button type="submit" class="btn btn-outline-dark" (click)="modal.close()">Save</button>
-    </div>
-</form>
-  </ng-template>
-
-  <ng-template #addImage let-modal>
+        <div class="modal-footer">
+            <button type="submit" class="btn btn-standard btn-w-100" (click)="modal.close()">Save</button>
+        </div>
+    </form>
+</ng-template>
+<ng-template #addImage let-modal>
     <div class="modal-header">
-      <h4 class="modal-title" id="modal-basic-title">Add Image</h4>
-      <button type="button" class="close" aria-label="Close" (click)="modal.dismiss()">
-        <span aria-hidden="true">&times;</span>
-      </button>
+        <h4 class="modal-title" id="modal-basic-title">Add Image</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss()">
+            <span aria-hidden="true">&times;</span>
+        </button>
     </div>
     <form (ngSubmit)="onAddSubmit($event)">
-    <div class="modal-body">
-        <div class="form-group">
-            <label for="imageUrlAdd">Image URL</label>
-            <input id="imageUrlAdd" class="form-control" name="imageUrlAdd">
+        <div class="modal-body">
+            <div class="form-group mb-0">
+                <label for="imageUrlAdd">Image URL</label>
+                <input id="imageUrlAdd" autocomplete="off" class="form-control" name="imageUrlAdd">
+            </div>
         </div>
+        <div class="modal-footer">
+            <button type="submit" class="btn btn-standard btn-w-100" (click)="modal.close()">Save</button>
+        </div>
+    </form>
+</ng-template>
+<ng-template #removeImage let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Remove Image</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <h6>Are you sure that you you want to remove this image?</h6>
     </div>
     <div class="modal-footer">
-      <button type="submit" class="btn btn-outline-dark" (click)="modal.close()">Save</button>
+        <button type="button" class="btn btn-standard btn-w-100" (click)="onRemoveOk(); modal.close()">Remove</button>
+        <button type="button" class="btn btn-standard btn-w-100" (click)="modal.close()">Cancel</button>
     </div>
-</form>
-  </ng-template>
+</ng-template>
 
 
 
