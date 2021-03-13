@@ -26,7 +26,7 @@ export class SignupComponent implements OnInit {
 
   onSubmit(){
     this.userService.signup(this.user).subscribe(data => {
-      this.router.navigate(['/login'] , {queryParams : {registered : 'true'}});
+      this.router.navigate(['/'] , {queryParams : {registered : 'true'}});
       this.toastrService.success('Successful registration , please check your email to activate account');
     },error => {
         {};

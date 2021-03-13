@@ -5,11 +5,10 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { PaginationComponent } from './parts/pagination/pagination.component';
 import { FormsModule } from '@angular/forms';
-import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { ToastrModule } from 'ngx-toastr';
 import { SignupComponent } from './pages/signup/signup.component';
-import { LoginComponent } from './pages/login/login.component';
 import { CookieService } from 'ngx-cookie-service';
 import { JwtInterceptorService } from './_interceptors/jwt-interceptor.service';
 import { ErrorInterceptorService } from './_interceptors/error-interceptor.service';
@@ -27,14 +26,14 @@ import { ProductCardComponent } from './parts/product-card/product-card.componen
 import { ProductCardDeckComponent } from './parts/product-card-deck/product-card-deck.component';
 import { LoaderInterceptorService } from './_interceptors/loader-interceptor.service';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { DragDropModule } from '@angular/cdk/drag-drop'
+import { DragDropModule } from '@angular/cdk/drag-drop';
+import { LoginComponent } from './pages/login/login.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     PaginationComponent,
     SignupComponent,
-    LoginComponent,
     ProductDetailComponent,
     UserEditComponent,
     CartComponent,
@@ -46,7 +45,8 @@ import { DragDropModule } from '@angular/cdk/drag-drop'
     FooterComponent,
     HomeComponent,
     ProductCardComponent,
-    ProductCardDeckComponent
+    ProductCardDeckComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

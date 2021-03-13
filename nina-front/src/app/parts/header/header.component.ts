@@ -42,7 +42,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
     this.name$ = this.userService.name$.subscribe(name => this.name = name);
     this.currentUserSubscription = this.userService.currentUser.subscribe(user => {
       this.currentUser = user;
-      console.log(this.currentUser);
       if(!user || user.role == this.Role.USER) {
           this.root = '/';
       }
@@ -58,7 +57,6 @@ export class HeaderComponent implements OnInit, OnDestroy {
 
   logout() : void {
     this.userService.logout();
-    //this.router.navigate(['/login'], { queryParams : {logout : 'true'} });
   }
 
   onSubmit() {

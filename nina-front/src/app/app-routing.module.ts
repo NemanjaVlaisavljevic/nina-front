@@ -19,30 +19,15 @@ const routes: Routes = [
   { path: 'shop' , component: HomeComponent, data: {animationState: 'shop'} },
   { path: 'product/:id', component: ProductDetailComponent, data: {animationState: 'product'} },
   { path: 'logout' , component: LoginComponent },
-  { path: 'register' , component: SignupComponent },
-  { path: 'profile' , component: UserEditComponent },
-  { path: 'order', component: OrderComponent, canActivate: [AuthGuard] },
-  { path: 'order/:id' , component: OrderDetailComponent, canActivate: [AuthGuard] },
+  { path: 'register' , component: SignupComponent, data: {animationState: 'register'} },
+  { path: 'profile' , component: UserEditComponent, data: {animationState: 'profile'} },
+  { path: 'order', component: OrderComponent, canActivate: [AuthGuard], data: {animationState: 'order'} },
+  { path: 'order/:id' , component: OrderDetailComponent, canActivate: [AuthGuard], data: {animationState: 'orderid'} },
   { path: 'cart', component: CartComponent, data: {animationState: 'cart'} },
   { path: 'admin', redirectTo: 'admin/product', pathMatch: 'full' },
-  { path: 'admin/product' , component : ProductListComponent, canActivate: [AuthGuard], data: {roles: [UserRole.ADMIN]} },
-  { path: 'admin/product/new' , component: ProductEditComponent, canActivate: [AuthGuard], data: {roles: [UserRole.ADMIN]} },
-  { path: 'admin/product/:id/edit' , component: ProductEditComponent, canActivate: [AuthGuard], data: {roles: [UserRole.ADMIN]} }
-
-  /* {path: 'product/:id', component: ProductDetailComponent},
-  {path : 'logout' , component : LoginComponent},
-  {path : 'register' , component : SignupComponent},
-  {path : 'profile' , component : UserEditComponent , canActivate : [AuthGuard]},
-  {path: 'order', component: OrderComponent, canActivate: [AuthGuard]},
-  {path : 'order/:id' , component : OrderDetailComponent , canActivate : [AuthGuard]},
-  {path: 'cart', component: CartComponent},
-  {path: 'admin', redirectTo: 'admin/product', pathMatch: 'full'},
-  {path : 'admin/product' , component : ProductListComponent ,
-   canActivate : [AuthGuard], data: {roles: [UserRole.ADMIN]}},
-  {path : 'admin/product/new' , component : ProductEditComponent ,
-    canActivate : [AuthGuard] , data : {roles : [UserRole.ADMIN]}},
-  {path : 'admin/product/:id/edit' , component : ProductEditComponent ,
-    canActivate : [AuthGuard] , data : {roles : [UserRole.ADMIN]}} */
+  { path: 'admin/product' , component : ProductListComponent, canActivate: [AuthGuard], data: {roles: [UserRole.ADMIN], animationState: 'adminproduct'} },
+  { path: 'admin/product/new' , component: ProductEditComponent, canActivate: [AuthGuard], data: {roles: [UserRole.ADMIN], animationState: 'adminproductnew'} },
+  { path: 'admin/product/:id/edit' , component: ProductEditComponent, canActivate: [AuthGuard], data: {roles: [UserRole.ADMIN], animationState: 'adminproductedit'} }
 ];
 
 @NgModule({

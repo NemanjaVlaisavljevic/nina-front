@@ -7,6 +7,7 @@ import {
     state
   } from '@angular/animations';
   
+  // USED FOR ROUTER-OUTLET CHANGES
   export const fadeAnimation = trigger('fadeAnimation', [
     transition('cart => *', [
       query(':enter, :leave', style({ position: 'absolute', top: 0, left: 0, right: 0 }), {optional: true}),

@@ -4,7 +4,7 @@
 
 <nav class="navbar navbar-expand-lg navbar-default">
     <div class="container">
-        <a class="navbar-brand" [routerLink]="root">
+        <a class="navbar-brand" routerLink="shop">
             <img src="/assets/logo-b.png" width="30" height="30" class="d-inline-block align-top navbar-logo" alt="">
             <span class="ml-2">Nina's Shop</span>
         </a>
@@ -28,6 +28,7 @@
                   <div ngbDropdownMenu class="dropdown-menu dropdown-menu-right" aria-labelledby="self-dropdown">
                     <a ngbDropdownItem class="dropdown-item" routerLink="/profile">Profile</a>
                     <a ngbDropdownItem class="dropdown-item" routerLink="/order">Orders</a>
+                    <a *ngIf="currentUser && currentUser.role == Role.ADMIN" ngbDropdownItem class="dropdown-item" routerLink="/admin/product">Products</a>
                     <div class="dropdown-divider"></div>
                     <a ngbDropdownItem class="dropdown-item" (click)="logout()" routerLink="/">Sign Out</a>
                   </div>

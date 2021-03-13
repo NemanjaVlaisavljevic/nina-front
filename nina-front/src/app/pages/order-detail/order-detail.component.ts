@@ -26,7 +26,6 @@ export class OrderDetailComponent implements OnInit {
     this.order$ = this.orderService.showOneOrder(+this.activateRoute.snapshot.paramMap.get('id'));
     this.currentUserSubscription = this.userService.currentUser.subscribe(user => {
       this.currentUser = user;
-      console.log(this.currentUser);
     });
   }
 

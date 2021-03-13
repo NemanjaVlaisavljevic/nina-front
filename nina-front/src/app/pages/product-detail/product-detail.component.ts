@@ -16,8 +16,6 @@ import { UserService } from 'src/app/services/user.service';
   styleUrls: ['./product-detail.component.css']
 })
 export class ProductDetailComponent implements OnInit {
-
-  title : string;
   productInfo : ProductInfo;
   count : number;
   productSizeInNumber : number;
@@ -36,8 +34,6 @@ export class ProductDetailComponent implements OnInit {
   ngOnInit(): void {
     this.getProduct();
     this.count = 1;
-    this.title = 'Product Details';
-    //this.src = this.productInfo?.productIcon;
   }
 
   increaseCount() {
@@ -75,17 +71,10 @@ export class ProductDetailComponent implements OnInit {
       this.count--;
   }
 
- /*  hover(link){
-    if(this.src !== link)
-      this.src = link;
-  }
- */
-
   onHover(image: ProductIcon) {
     this.imageSource = image.productIcon;
   }
 
-  // XL - 0, L - 1, M - 2, S - 3
   selectSize(size: string) {
     if(this.selectedProductSizeStock?.productSize !== size) {
       this.selectedProductSizeStock = this.productInfo.productSizes.find(x => x.productSize === size);
@@ -113,10 +102,9 @@ export class ProductDetailComponent implements OnInit {
       this.productInfo = data;
       this.productInfo.productSizes = this.sortSizes(this.productInfo.productSizes);
       this.imageSource = this.getFirstImage();
-      //this.src = this.productInfo.productIcon;
-      console.log(this.productInfo.productIcons);
-    },error => {
-      console.log('Couldnt get product');
+    },
+    error => {
+
     });
   }
 

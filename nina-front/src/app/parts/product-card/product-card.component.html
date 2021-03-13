@@ -1,6 +1,7 @@
 <a routerLink="/product/{{product.productId}}">
   <div class="card mx-sm-auto h-100 rounded">
-      <img class="card-img-top rounded product-image mx-auto d-block" src="{{getFirstImage()}}" alt="{{product.productName}}">
+      <img class="card-img-top rounded product-image mx-auto d-block" (mouseenter)="onMouseEnter()" (mouseleave)="onMouseLeave()"
+        [src]="imageSource" alt="{{product.productName}}">
       <div class="row py-2 h-100">
         <div class="col text-left product-name">
           <span>{{product.productName}}</span>

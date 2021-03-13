@@ -15,6 +15,7 @@ import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
   styleUrls: ['./product-edit.component.css']
 })
 export class ProductEditComponent implements OnInit, AfterContentChecked {
+	title: string;
 	product = new ProductInfo();
 	productId : number;
 	isEdit = false;
@@ -31,9 +32,17 @@ export class ProductEditComponent implements OnInit, AfterContentChecked {
 		this.productId = +this.activeRoute.snapshot.paramMap.get('id');
 		if(this.productId) {
 		  	this.isEdit = true;
+			this.title = "Edit Product";
 		  	this.productService.getProductDetail(this.productId).subscribe(data => {
 				this.product = data;
 		  	});
+		}
+		else {
+			this.title = "Add Product";
+			this.addSizeIfNotExist(ProductSize.S);
+			this.addSizeIfNotExist(ProductSize.M);
+			this.addSizeIfNotExist(ProductSize.L);
+			this.addSizeIfNotExist(ProductSize.XL);
 		}
 	}
 

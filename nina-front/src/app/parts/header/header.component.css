@@ -5,9 +5,9 @@ nav {
     font-weight: 500;
 }
 
-.navbar-logo {
-    /* border-radius: 50%; */
-}
+/* .navbar-logo {
+    border-radius: 50%;
+} */
 
 .navbar-bars {
     font-size:30px;
@@ -45,20 +45,6 @@ nav a:hover, a:visited:hover {
     }
 }
 
-.dropdown-menu {
-    background-color: #EDD8CF;
-    border: 1px solid #BBB2B5;
-    color: #AB3B61;
-}
-
 .sign-in-invalid {
     color: #9A1003;
-}
-
-.dropdown-item:hover, .dropdown-item:focus {
-    background-color: #EDE2DC;
-}
-
-.dropdown-divider {
-    border-top: 1px solid #BBB2B5;
 }

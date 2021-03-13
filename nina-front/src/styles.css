@@ -228,3 +228,104 @@ option {
   padding-top: 0px;
   padding-bottom: 0px;
 }
+
+/* -------------------------------------------------------------------------------------- */
+/* TABLE CONTROLS OVERRIDE                                                                */
+/* -------------------------------------------------------------------------------------- */
+
+.table thead th {
+  border-bottom: 1px solid #BBB2B5;
+}
+
+.table th {
+  color: #AB3B61;
+  border-top: 1px solid #BBB2B5;
+}
+
+tbody{
+  color: #AB3B61;
+}
+
+tbody tr:nth-of-type(odd){
+  background-color: #EDE2DC;
+  border-top: 1px solid #BBB2B5;
+}
+
+tbody tr:nth-of-type(even){
+  background-color: #e5d5cc;
+  border-top: 1px solid #BBB2B5;
+}
+
+tbody tr:last-child{
+  border-bottom: 1px solid #BBB2B5;
+}
+
+.table td {
+  border: 0px;
+}
+
+/* -------------------------------------------------------------------------------------- */
+/* DROPDOWN CONTROLS OVERRIDE                                                             */
+/* -------------------------------------------------------------------------------------- */
+
+.dropdown-menu {
+  background-color: #EDD8CF;
+  border: 1px solid #BBB2B5;
+  color: #AB3B61;
+}
+
+.dropdown-item {
+  color: #AB3B61;
+}
+
+.dropdown-item:hover, .dropdown-item:focus {
+  background-color: #EDE2DC;
+  color: #123D6A;
+}
+
+.dropdown-divider {
+  border-top: 1px solid #BBB2B5;
+}
+
+/* -------------------------------------------------------------------------------------- */
+/* PAGINATION CONTROLS OVERRIDE                                                           */
+/* -------------------------------------------------------------------------------------- */
+
+.page-link {
+  background-color: #EDC8B8;
+  color: #AB3B61;
+  cursor: pointer;
+  user-select: none;
+  border-color: #BBB2B5;
+}
+
+.page-link:hover {
+  background-color: #E4AD96;
+  color: #123D6A;
+  border-color: #BBB2B5;
+}
+
+.page-link.disabled {
+  background-color: #CDBFBE;
+  color: #C4788C;
+}
+
+.page-item.active > .page-link {
+  background-color: #E4AD96;
+  border-color: #BBB2B5;
+  color: #123D6A;
+}
+
+/* -------------------------------------------------------------------------------------- */
+/* LINKS OVERRIDE                                                                         */
+/* -------------------------------------------------------------------------------------- */
+
+a, a:visited {
+  color: #AB3B61;
+  text-decoration: none;
+}
+
+a:hover {
+  color: #123D6A;
+  text-decoration: none;
+}

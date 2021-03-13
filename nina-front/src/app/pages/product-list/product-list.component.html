@@ -1,40 +1,145 @@
-<h1 align="center" class="display-4 ">Products</h1>
-<a *ngIf="currentUser?.role == Role.ADMIN" style="color: inherit"
-   routerLink="/admin/product/new" class="float-right mb-3"><i class="fas fa-plus fa-2x">Add</i>
-</a>
-<table id="table" class="table table-striped text-center" style="width:100%;">
-    <thead>
-    <tr>
-        <th scope="col">Photo</th>
-        <th scope="col">Code</th>
-        <th scope="col">Name</th>
-        <th scope="col">Description</th>
-        <th scope="col">Price</th>
-        <th scope="col">Stock</th>
-        <th scope="col">Status</th>
-        <th scope="col">Action</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr *ngFor="let productInfo of page?.content">
-        <th class="align-middle" scope="row">
-            <img height="100px" src="{{productInfo.productIcons[0].productIcon}}" alt="{{productInfo.productName}}">
-        </th>
-        <td class="align-middle">{{productInfo.productId}}</td>
-        <td class="align-middle">{{productInfo.productName}}</td>
-        <td class="align-middle">{{productInfo.productDescription}}</td>
-        <td class="align-middle">{{productInfo.productPrice}} RSD</td>
-        <td class="align-middle">{{productInfo.productStock}}</td>
-        <td class="align-middle">{{ProductStatus[productInfo.productStatus]}}</td>
-        <td class="align-middle">
-            <a style="display: block" routerLink="/admin/product/{{productInfo.productId}}/edit">
-                Edit</a>
+<div class="page-content-wrapper h-100">
+    <div class="wrapped-content">
+        <div class="container-fluid">
+            <div class="row mt-2">
+                <div class="col-12 text-center">
+                    <h1>Products</h1>
+                    <hr>
+                </div>
+            </div>
+            <div *ngIf="currentUser?.role == Role.ADMIN" class="row mt-2">
+                <div class="col-12">
+                    <a routerLink="/admin/product/new" class="btn btn-standard">Add Product</a>
+                </div>     
+            </div>
+            <div class="row mt-2 justify-content-center">
+                <div class="col-12">
+                    <table class="table table-responsive-md table-striped">
+                        <thead>
+                            <tr>
+                                <th scope="col">Photo</th>
+                                <th scope="col">Name</th>
+                                <th class="text-center" scope="col">Price</th>
+                                <th class="text-center" scope="col">Stock</th>
+                                <th class="text-center" scope="col">Status</th>
+                                <th class="text-center" scope="col">Actions</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let productInfo of pageProducts">
+                                <td class="align-middle text-center" style="width: 75px;" scope="row">
+                                    <img class="img-thumbnail product-thumbnail" src="{{productInfo.productIcons[0].productIcon}}" alt="{{productInfo.productName}}">
+                                </td>
+                                <td class="align-middle product-name">{{productInfo.productName}}</td>
+                                <td class="align-middle text-center">{{productInfo.productPrice}} RSD</td>
+                                <td class="align-middle text-center">{{productInfo.productStock}}</td>
+                                <td class="align-middle text-center">{{ProductStatus[productInfo.productStatus]}}</td>
+                                <td class="align-middle text-center">
+                                    <div ngbDropdown placement="bottom-right" container="body">
+                                        <button class="btn btn-standard btn-sm" ngbDropdownToggle>Actions</button>
+                                        <div ngbDropdownMenu>
+                                            <a ngbDropdownItem routerLink="/admin/product/{{productInfo.productId}}/edit">Edit</a>
+                                            <a ngbDropdownItem routerLink="./" (click)="selectedProduct = productInfo; showModal(removeProduct)">Remove</a>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+            <div class="row mt-2">
+                <div class="col-12">
+                    <!-- <app-pagination class="float-right" [currentPage]="page"></app-pagination> -->
+                    <div>
+                        <ul class="pagination justify-content-end">
+                            <li class="page-item" *ngIf="pageNum > 1; else prev" (click)="previousPage()">
+                                <a class="page-link">Previous</a>
+                            </li>
+                            <ng-template #prev>
+                                <li class="page-item">
+                                    <a class="page-link disabled">Previous</a>
+                                </li>
+                            </ng-template>
 
-            <a *ngIf="currentUser?.role == Role.ADMIN" style="display: block"
-               (click)="deleteProduct(page.content, productInfo)" routerLink="./">
-                Remove</a>
-        </td>
+                            <ng-container *ngFor="let loop of counter(pageMax); let i= index">
+                                <li class="page-item page-link" *ngIf="(pageNum - 1) != i; else active" (click)="changePage(i+1)">
+                                    {{ i + 1 }}
+                                </li>
+                                <ng-template #active>
+                                    <li class="page-item active" >
+                                        <button class="page-link" disabled>{{ i + 1 }}</button>
+                                    </li>
+                                </ng-template>
+                            </ng-container>
 
-    </tbody>
-</table>
-<app-pagination [currentPage]="page"></app-pagination>
+                            <li class="page-item" *ngIf="pageNum !== pageMax; else next" (click)="nextPage()">
+                                <a class="page-link">Next</a>
+                            </li>
+                            <ng-template #next>
+                                <li class="page-item">
+                                    <a class="page-link disabled">Next</a>
+                                </li>
+                            </ng-template>
+                      
+                            <!-- <ng-container *ngFor="let item of counter(currentPage?.totalPages); let i = index">
+                                <li class="page-item" *ngIf="currentPage && currentPage.number != i; else active">
+                                  <a class="page-link "
+                                          routerLink="./"
+                                          [queryParams]="{ page: i + 1, size: currentPage?.size }"
+                                  >{{ i + 1 }}</a
+                                  >
+                              </li>
+                                <ng-template #active>
+                                    <li
+                                            class="page-item active "
+                      
+                                    >
+                                        <button class="page-link " disabled>{{ i + 1 }}</button>
+                                    </li>
+                                </ng-template>
+                            </ng-container>
+                      
+                            <li
+                                    class="page-item"
+                                    *ngIf="currentPage?.number + 1 < currentPage?.totalPages; else next"
+                            >
+                                <a
+                                        class="page-link"
+                                        [routerLink]="['./']"
+                                        [queryParams]="{
+                                page: currentPage?.number + 2,
+                                size: currentPage?.size
+                              }"
+                                >Next</a
+                                >
+                          </li>
+                          <ng-template #next>
+                              <li class="page-item disabled "><a class="page-link">Next</a></li>
+                          </ng-template> -->
+                        </ul>
+                      </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="wrapped-footer">
+      <app-footer></app-footer>
+    </div>
+  </div>
+
+<ng-template #removeProduct let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Remove Product</h4>
+        <button type="button" class="close" aria-label="Close" (click)="modal.dismiss()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <h6>Are you sure that you you want to remove this product?</h6>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-standard btn-w-100" (click)="onRemoveOk(page?.content); modal.close()">Remove</button>
+        <button type="button" class="btn btn-standard btn-w-100" (click)="modal.close()">Cancel</button>
+    </div>
+</ng-template>

@@ -2,7 +2,6 @@ import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ToastrService } from 'ngx-toastr';
 import { UserRole } from 'src/app/enums/UserRole';
-import { ProductInfo } from 'src/app/models/ProductInfo';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({

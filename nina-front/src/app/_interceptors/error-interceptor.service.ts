@@ -11,17 +11,14 @@ import { UserService } from '../services/user.service';
 })
 export class ErrorInterceptorService implements HttpInterceptor {
 
-  constructor(private userService : UserService ,
-    private router : Router) {
-
-     }
+  constructor(private userService: UserService, private router: Router) {}
 
   intercept(request: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>> {
     return next.handle(request).pipe(
       catchError(err => {
           if(err.status === 401){
             this.userService.logout();
-            this.router.navigate(['/login']);
+            this.router.navigate(['/']);
           }
 
           const error = err.error || err.statusText;
@@ -29,6 +26,4 @@ export class ErrorInterceptorService implements HttpInterceptor {
       })
     );
   }
-
-
 }

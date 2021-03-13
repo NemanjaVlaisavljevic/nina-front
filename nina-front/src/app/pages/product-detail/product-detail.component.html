@@ -1,97 +1,105 @@
 <div class="page-content-wrapper h-100">
-  <div class="wrapped-content">
-    <div class="container mx-auto">
-      <div class="row mt-2">
-        <div class="col-12 col-sm-6 text-center">
-          <div class="row">
-            <div class="col-12">
-              <img class="img-fluid image-main rounded mr-1" [src]="imageSource" >
-            </div>
-          </div>
-          <div class="row mt-2">
-            <div class="col-12">
-              <div class="image-select-container justify-content-center">
-                <img *ngFor="let image of getProductImages()" [ngClass]="{'image-select-active': imageSource === image.productIcon}" class="img-fluid m-1 rounded image-select"  src="{{image.productIcon}}" (mouseenter)="onHover(image)">
-            </div>
-          </div>
-        </div>
-      </div>
-        <div class="col-12 col-sm-6">
-          <div class="row">
-            <div class="col-12">
-              <div class="product-details">
-                <h5 style="flex: 1;">{{productInfo?.productName}}</h5>
-                <h6>{{productInfo?.productPrice}} RSD</h6>
-                <hr/>
-              </div>
-            </div>
-          </div>
-          <div *ngIf="productInfo?.categoryType === 0 && productInfo?.productStatus == 0 && productInfo?.productStock > 0" class="row mb-2">
-            <div class="col-12">
-              <div class="container-size" >
-                <div *ngFor="let size of getProductSizes()" 
-                  [ngClass]="{'size': selectedProductSizeStock?.productSize !== size.productSize, 'size-active': selectedProductSizeStock?.productSize === size.productSize}"
-                  (click)="selectSize(size.productSize)">
-                  {{size.productSize}}
-                </div>
-              </div>
-            </div>
-          </div>
-          <div class="row">
-            <div class="col-12">
-              <div class="container-quantity">
-                <!-- OUT OF STOCK -->
-                <div *ngIf="(productInfo?.productStatus != 0 || productInfo?.productStock <= 0); else hasStock">
-                  <p>Out of stock</p>
-                </div>
-                <!-- HAS STOCK -->
-                <ng-template #hasStock>
-                  <div [ngClass]="{'btn-quantity ': validateDecreaseButton(), 'btn-quantity-disabled ': !validateDecreaseButton()}" 
-                    class="btn-standard" (click)="decreaseCount()">-</div>
-                  <span class="mx-2">{{count}}</span>
-                  <div [ngClass]="{'btn-quantity ': validateIncreaseButton(), 'btn-quantity-disabled ': !validateIncreaseButton()}" 
-                    class="btn-standard" (click)="increaseCount()">+</div>
-    
-                  <!-- CATEGORY IS NOT CLOTHING -->
-                  <small *ngIf='productInfo?.categoryType !== 0; else splitStock' class="ml-2">{{productInfo?.productStock}} available</small>
-                  <!-- CATEGORY IS CLOTHING -->
-                  <ng-template #splitStock>
-                    <!-- SIZE SELECTED -->
-                    <small *ngIf='selectedProductSizeStock !== undefined; else selectedStockUndefined' class="ml-2">
-                      {{selectedProductSizeStock?.currentSizeStock}} available
-                    </small>
-                    <!-- SIZE NOT SELECTED -->
-                    <ng-template #selectedStockUndefined>
-                      <small class="ml-2">Select a size to view it's stock</small>
-                    </ng-template>
-                  </ng-template>
-                </ng-template>
-              </div>
-            </div>
-          </div>
-          <div class="row mt-3" *ngIf="(productInfo?.productStatus != 0 || productInfo?.productStock <= 0); else addElse"></div>
-          <ng-template #addElse>
-            <div class="row mt-3 container-add">
-              <div class="col-12">
-                  <button [disabled]="selectedProductSizeStock === undefined && productInfo?.categoryType === 0" class="btn btn-standard" (click)="addToCart()">Add to Cart</button>
-              </div>
-              <div class="col-12">
-                <small>Subtotal: {{count * productInfo?.productPrice}} RSD</small>
-              </div>
-              <div class="col-12">
-                <hr/>
-              </div>
-              <div class="col-12">
-                <h6>{{productInfo?.productDescription}}</h6>
-              </div>
-            </div>
-          </ng-template>
-        </div>
-      </div>
-    </div>
-    
-  </div>
-  <div class="wrapped-footer">
-    <app-footer></app-footer>
-  </div>
+	<div class="wrapped-content">
+    	<div class="container mx-auto">
+      		<div class="row mt-2">
+        		<div class="col-12 text-center">
+            		<hr>
+        		</div>
+    		</div>
+			<div class="row mt-2">
+				<div class="col-12 col-sm-6 text-center">
+					<div class="row">
+						<div class="col-12">
+							<img class="img-fluid image-main rounded mr-1" [src]="imageSource" >
+						</div>
+					</div>
+					<div class="row mt-2">
+						<div class="col-12">
+							<div class="image-select-container justify-content-center">
+								<img *ngFor="let image of getProductImages()" [ngClass]="{'image-select-active': imageSource === image.productIcon}" 
+									class="img-fluid m-1 rounded image-select"  src="{{image.productIcon}}" (mouseenter)="onHover(image)">
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="col-12 col-sm-6">
+					<div class="row">
+						<div class="col-12">
+							<div class="product-details">
+								<h5 style="flex: 1;">{{productInfo?.productName}}</h5>
+								<h6>{{productInfo?.productPrice}} RSD</h6>
+								<hr/>
+							</div>
+						</div>
+					</div>
+					<div *ngIf="productInfo?.categoryType === 0 && productInfo?.productStatus == 0 && productInfo?.productStock > 0" class="row mb-2">
+						<div class="col-12">
+							<div class="container-size" >
+								<div *ngFor="let size of getProductSizes()" 
+									[ngClass]="{'size': selectedProductSizeStock?.productSize !== size.productSize, 'size-active': selectedProductSizeStock?.productSize === size.productSize}"
+									(click)="selectSize(size.productSize)">
+									{{size.productSize}}
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-12">
+							<div class="container-quantity">
+								<!-- OUT OF STOCK -->
+								<div *ngIf="(productInfo?.productStatus != 0 || productInfo?.productStock <= 0); else hasStock">
+									<p>Out of stock</p>
+								</div>
+								<!-- HAS STOCK -->
+								<ng-template #hasStock>
+									<div [ngClass]="{'btn-quantity ': validateDecreaseButton(), 'btn-quantity-disabled ': !validateDecreaseButton()}" 
+										class="btn-standard" (click)="decreaseCount()">-</div>
+									<span class="mx-2">{{count}}</span>
+									<div [ngClass]="{'btn-quantity ': validateIncreaseButton(), 'btn-quantity-disabled ': !validateIncreaseButton()}" 
+										class="btn-standard" (click)="increaseCount()">+</div>
+									
+									<!-- CATEGORY IS NOT CLOTHING -->
+									<small *ngIf='productInfo?.categoryType !== 0; else splitStock' class="ml-2">{{productInfo?.productStock}} available</small>
+									<!-- CATEGORY IS CLOTHING -->
+									<ng-template #splitStock>
+										<!-- SIZE SELECTED -->
+										<small *ngIf='selectedProductSizeStock !== undefined; else selectedStockUndefined' class="ml-2">
+											{{selectedProductSizeStock?.currentSizeStock}} available
+										</small>
+										<!-- SIZE NOT SELECTED -->
+										<ng-template #selectedStockUndefined>
+											<small class="ml-2">Select a size to view it's stock</small>
+										</ng-template>
+									</ng-template>
+								</ng-template>
+							</div>
+						</div>
+					</div>
+					<div class="row mt-3" *ngIf="(productInfo?.productStatus != 0 || productInfo?.productStock <= 0); else addElse"></div>
+					<ng-template #addElse>
+						<div class="row mt-3 container-add">
+							<div class="col-12">
+								<button [disabled]="selectedProductSizeStock === undefined && productInfo?.categoryType === 0" 
+									class="btn btn-standard" (click)="addToCart()">
+									Add to Cart
+								</button>
+							</div>
+							<div class="col-12">
+								<small>Subtotal: {{count * productInfo?.productPrice}} RSD</small>
+							</div>
+							<div class="col-12">
+								<hr/>
+							</div>
+							<div class="col-12">
+								<h6>{{productInfo?.productDescription}}</h6>
+							</div>
+						</div>
+					</ng-template>
+				</div>
+			</div>
+    	</div>
+  	</div>
+	<div class="wrapped-footer">
+		<app-footer></app-footer>
+	</div>
 </div>

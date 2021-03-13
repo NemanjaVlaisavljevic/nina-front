@@ -37,7 +37,6 @@ export class UserService {
                 if(loginForm.remembered){
                     localStorage.setItem('currentUser' , JSON.stringify(user));
                 }
-                console.log((user.name));
                 this.nameTerms.next(user.name);
                 this.currentUserSubject.next(user);
                 return user;
@@ -71,8 +70,6 @@ export class UserService {
    // Handle Errors Method
    private handleError<T>(operation = 'operation', result?: T) {
     return (error: any): Observable<T> => {
-
-        console.log(error); // log to console instead
 
         // Let the app keep running by returning an empty result.
         return of(result as T);
